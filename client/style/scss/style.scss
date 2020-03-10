@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:500&display=swap');
+
+$color-background: #1d3a45;
+$color-primary: #24252A;
+$color-secondary: rgba(140, 143, 151, 1);
+$color-font-nav: #edf0f1;
+$color-button-blue: #007a99;
+$color-backlog: #463b3f;
+$color-product: #475f82;
+$color-development: #dcc8ad;
+$color-done: #97b3d4;
+
+body{
+    margin: 0;
+    background-color: $color-background;
+    font-family: "Montserrat", sans-serif;
+    text-align: center;
+}
+
+@import "navbar.scss";
+@import "kanban.scss";
+
+.user-access{
+    max-width: 500px;
+    margin: 6rem auto;
+    border-radius: 10px;
+    padding: 2rem;
+    background-color: $color-primary;
+}
+.user-access form{
+    margin: .5rem 0;
+    border-bottom: 3px solid black;
+    padding-bottom: 1rem;
+}  
+
+.box-title h4{
+    margin: 0;
+}
+
+.textbox input{
+    margin: .5rem 0;
+    padding: .5rem .5rem;
+    width: 95%;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: black;
+    color: blanchedalmond;
+}
+
+.textbox input:focus{
+    animation: glow .5s ease-out infinite alternate;
+}
+
+.action-button{
+    display: grid;
+    margin-top: 5px;
+}
+
+.action-button span{
+    cursor: pointer;
+    color: $color-button-blue;
+    margin: inherit;
+}
+
+.register-btn, .login-btn{
+    margin: 1rem 0 0 0;
+}
+
+.submit-btn{
+    margin: 1rem 0 0 0;
+    color: $color-font-nav;
+    font-weight: 500;
+    font-size: 16px;
+    text-decoration: none;
+    background-color: $color-button-blue;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    padding: 9px 15px;
+}
+
+.submit-btn:hover{
+    background-color: #00576d;
+}

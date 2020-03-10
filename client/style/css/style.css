@@ -1,0 +1,215 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:500&display=swap");
+body {
+  margin: 0;
+  background-color: #1d3a45;
+  font-family: "Montserrat", sans-serif;
+  text-align: center;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 5%;
+  background-color: #24252A;
+  width: auto;
+}
+header h4 {
+  color: #edf0f1;
+  cursor: pointer;
+}
+
+li, .button-li {
+  font-weight: 500;
+  font-size: 16px;
+  color: #edf0f1;
+  text-decoration: none;
+  padding: 9px 15px;
+}
+
+.nav_link {
+  list-style: none;
+}
+
+.nav_link li {
+  display: inline;
+}
+
+.nav_link .button-li {
+  background-color: #007a99;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+.nav_link .button-li:hover {
+  background-color: #00576d;
+}
+
+.user_name, .box-title {
+  text-align: center;
+  color: #edf0f1;
+  font-size: 20px;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 4% 0 4%;
+}
+
+.kanban-box {
+  height: 100%;
+  width: 40%;
+  border-radius: 10px;
+  background-color: #8c8f97;
+  margin: 0 1% 0 1%;
+}
+.kanban-box h5 {
+  text-align: center;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding: 10px;
+  border-radius: 10px 10px 0 0;
+}
+
+.backlog h5 {
+  background-color: #463b3f;
+}
+
+.product h5 {
+  background-color: #475f82;
+}
+
+.development h5 {
+  background-color: #dcc8ad;
+}
+
+.done h5 {
+  background-color: #97b3d4;
+}
+
+.kanban-box:hover {
+  animation: glow 0.5s ease-out infinite alternate;
+}
+
+@keyframes glow {
+  0% {
+    border-color: #181818;
+    box-shadow: 0 0 2px rgba(192, 192, 192, 0.2), inset 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+  100% {
+    border-color: #181818;
+    box-shadow: 0 0 10px #ebe9e9, inset 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+}
+.backlog-list {
+  border: 3px solid #463b3f;
+  border-radius: 10px;
+  margin: 5px 5px 5px 5px;
+}
+
+.product-list {
+  border: 3px solid #475f82;
+  border-radius: 10px;
+  margin: 5px 5px 5px 5px;
+}
+
+.development-list {
+  border: 3px solid #dcc8ad;
+  border-radius: 10px;
+  margin: 5px 5px 5px 5px;
+}
+
+.done-list {
+  border: 3px solid #97b3d4;
+  border-radius: 10px;
+  margin: 5px 5px 5px 5px;
+}
+
+.content p {
+  margin: 5px;
+}
+
+.content .title {
+  text-align: center;
+  font-weight: bold;
+}
+
+.list {
+  cursor: pointer;
+}
+
+.add-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 25px;
+  color: whitesmoke;
+  cursor: pointer;
+}
+
+.user-access {
+  max-width: 500px;
+  margin: 6rem auto;
+  border-radius: 10px;
+  padding: 2rem;
+  background-color: #24252A;
+}
+
+.user-access form {
+  margin: 0.5rem 0;
+  border-bottom: 3px solid black;
+  padding-bottom: 1rem;
+}
+
+.box-title h4 {
+  margin: 0;
+}
+
+.textbox input {
+  margin: 0.5rem 0;
+  padding: 0.5rem 0.5rem;
+  width: 95%;
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: black;
+  color: blanchedalmond;
+}
+
+.textbox input:focus {
+  animation: glow 0.5s ease-out infinite alternate;
+}
+
+.action-button {
+  display: grid;
+  margin-top: 5px;
+}
+
+.action-button span {
+  cursor: pointer;
+  color: #007a99;
+  margin: inherit;
+}
+
+.register-btn, .login-btn {
+  margin: 1rem 0 0 0;
+}
+
+.submit-btn {
+  margin: 1rem 0 0 0;
+  color: #edf0f1;
+  font-weight: 500;
+  font-size: 16px;
+  text-decoration: none;
+  background-color: #007a99;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  padding: 9px 15px;
+}
+
+.submit-btn:hover {
+  background-color: #00576d;
+}
+
+/*# sourceMappingURL=style.css.map */
