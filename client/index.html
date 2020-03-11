@@ -10,136 +10,125 @@
 </head>
 
 <body>
-    <header>
-        <h4>K4NBAN</h3>
-            <nav>
-                <ul class="nav_link">
-                    <li><button class="button-li" id="login-btn">Login</button></li>
-                    <li><button class="button-li" id="register-btn">Register</button></li>
-                    <li><button class="button-li" id="logout-btn">Logout</button></li>
-                </ul>
-            </nav>
-    </header>
-
-    <div class="box login-box user-access">
-        <div class="box-title">
-            <h4 class="login-title">Login</h4>
-        </div>
-        <form method="POST">
-            <div class="textbox">
-                <input type="text" id="login-email" placeholder="Email Address">
+    <div id="app">
+        <header>
+            <h4>K4NBAN</h3>
+                <nav>
+                    <ul class="nav_link">
+                        <li><button class="button-li" id="login-btn" v-if="no_token" v-on:click="showLogin">Login</button></li>
+                        <li><button class="button-li" id="register-btn" v-if="no_token" v-on:click="showRegister">Register</button></li>
+                        <li><button class="button-li" id="logout-btn" v-if="yes_token">Logout</button></li>
+                    </ul>
+                </nav>
+        </header>
+        <div class="box login-box user-access" v-if="login_box">
+            <div class="box-title">
+                <h4 class="login-title">Login</h4>
             </div>
-            <div class="textbox">
-                <input type="password" id="login-password" placeholder="Password">
+            <form method="POST">
+                <div class="textbox">
+                    <input type="text" id="login-email" placeholder="Email Address">
+                </div>
+                <div class="textbox">
+                    <input type="password" id="login-password" placeholder="Password">
+                </div>
+                <button id="login-submit" class="submit-btn">Sign In</button>
+            </form>
+            <div class="action-button">
+                <span v-on:click="showRegister">Click Here to Register</span>
+                <span>Click Here to Sign In with Google</span>
+                <!-- <button id="login-submit" class="login-btn">Sign In</button> -->
             </div>
-            <button id="login-submit" class="submit-btn">Sign In</button>
-        </form>
-        <div class="action-button">
-            <span>Click Here to Register</span>
-            <span>Click Here to Sign In with Google</span>
-            <!-- <button id="login-submit" class="login-btn">Sign In</button> -->
         </div>
+    
+        <div class="box register-box user-access" v-if="register_box">
+            <div class="box-title">
+                <h4 class="register-title">Register</h4>
+            </div>
+            <form method="POST">
+                <div class="textbox">
+                    <input type="text" id="register-name" placeholder="Name">
+                </div>
+                <div class="textbox">
+                    <input type="text" id="register-email" placeholder="Email Address">
+                </div>
+                <div class="textbox">
+                    <input type="password" id="register-password" placeholder="Password">
+                </div>
+                <button id="register-submit" class="submit-btn">Sign Up</button>
+            </form>
+            <div class="action-button">
+                <span v-on:click="showLogin">Click Here to Login</span>
+                <span>Click Here to Sign In with Google</span>
+                <!-- <button id="login-render" class="login-btn">Login</button> -->
+                <!-- <button id="login-submit" class="login-btn">Sign In</button> -->
+            </div>
+        </div>
+    
+        <div class="user_info-container box" v-if="user_info_box">
+            <h4 class="user_name box-title" id="user_name"> John Doe is a Gay </h4>
+        </div>
+        <div class="flex-container box" v-if="kanban_box">
+            <div class="kanban-box backlog">
+                <h5>Backlog</h5>
+                <div class="backlog-content content">
+                    <div class="backlog-list list">
+                        <p class="backlog-list-title title">Judul</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius, nostrum numquam eum quis
+                            obcaecati sunt. Explicabo illo unde nesciunt atque nobis! Eveniet possimus dignissimos</p>
+                    </div>
+                    <div class="backlog-list list">
+                        <p class="backlog-list-title title">Judul</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius, nostrum numquam eum quis
+                            obcaecati sunt.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="kanban-box product">
+                <h5>Product</h5>
+                <div class="product-content content">
+                    <div class="product-list list">
+                        <p class="product-list-title title">Judul</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius, nostrum numquam eum quis
+                            obcaecati sunt. Explicabo illo unde nesciunt atque nobis! Eveniet possimus dignissimos</p>
+                    </div>
+                    <div class="product-list list">
+                        <p class="product-list-title title">Judul</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius, nostrum numquam eum quis
+                            obcaecati sunt.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="kanban-box development">
+                <h5>Development</h5>
+                <div class="development-content content">
+                    <div class="development-list list">
+                        <p class="development-list-title title">Judul</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius, nostrum numquam eum quis
+                            obcaecati sunt.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="kanban-box done">
+                <h5>Done</h5>
+                <div class="done-content content">
+                    <div class="done-list list">
+                        <p class="done-list-title title">Judul</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius, nostrum numquam eum quis
+                            obcaecati sunt. Explicabo illo unde nesciunt atque nobis! Eveniet possimus dignissimos</p>
+                    </div>
+                    <div class="done-list list">
+                        <p class="done-list-title title">Judul</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius, nostrum numquam eum quis
+                            obcaecati sunt.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <i class="fa fa-plus-circle add-btn" style="font-size: 50px;" v-if="yes_token"></i>
     </div>
 
-    <div class="box register-box user-access">
-        <div class="box-title">
-            <h4 class="register-title">Register</h4>
-        </div>
-        <form method="POST">
-            <div class="textbox">
-                <input type="text" id="register-name" placeholder="Name">
-            </div>
-            <div class="textbox">
-                <input type="text" id="register-email" placeholder="Email Address">
-            </div>
-            <div class="textbox">
-                <input type="password" id="register-password" placeholder="Password">
-            </div>
-            <button id="register-submit" class="submit-btn">Sign Up</button>
-        </form>
-        <div class="action-button">
-            <span>Click Here to Login</span>
-            <span>Click Here to Sign In with Google</span>
-            <!-- <button id="login-render" class="login-btn">Login</button> -->
-            <!-- <button id="login-submit" class="login-btn">Sign In</button> -->
-        </div>
-    </div>
-
-    <div class="user_info-container box">
-        <h4 class="user_name box-title" id="user_name"> John Doe is a Gay </h4>
-    </div>
-    <div class="flex-container box">
-        <div class="kanban-box backlog">
-            <h5>Backlog</h5>
-            <div class="backlog-content content">
-                <div class="backlog-list list">
-                    <p class="backlog-list-title title">Judul</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius, nostrum numquam eum quis
-                        obcaecati sunt. Explicabo illo unde nesciunt atque nobis! Eveniet possimus dignissimos</p>
-                </div>
-                <div class="backlog-list list">
-                    <p class="backlog-list-title title">Judul</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius, nostrum numquam eum quis
-                        obcaecati sunt.</p>
-                </div>
-                <div class="backlog-list list">
-                    <p class="backlog-list-title title">Judul</p>
-                    <p>Lorem ipsum dolor sit amet</p>
-                </div>
-                <div class="backlog-list list">
-                    <p class="backlog-list-title title">Judul</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius, nostrum numquam eum quis
-                        obcaecati sunt. Explicabo illo unde nesciunt atque nobis! Eveniet possimus dignissimos</p>
-                </div>
-                <div class="backlog-list list">
-                    <p class="backlog-list-title title">Judul</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius, nostrum numquam eum quis
-                        obcaecati sunt.</p>
-                </div>
-            </div>
-        </div>
-        <div class="kanban-box product">
-            <h5>Product</h5>
-            <div class="product-content content">
-                <div class="product-list list">
-                    <p class="product-list-title title">Judul</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius, nostrum numquam eum quis
-                        obcaecati sunt. Explicabo illo unde nesciunt atque nobis! Eveniet possimus dignissimos</p>
-                </div>
-                <div class="product-list list">
-                    <p class="product-list-title title">Judul</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius, nostrum numquam eum quis
-                        obcaecati sunt.</p>
-                </div>
-            </div>
-        </div>
-        <div class="kanban-box development">
-            <h5>Development</h5>
-            <div class="development-content content">
-                <div class="development-list list">
-                    <p class="development-list-title title">Judul</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius, nostrum numquam eum quis
-                        obcaecati sunt.</p>
-                </div>
-            </div>
-        </div>
-        <div class="kanban-box done">
-            <h5>Done</h5>
-            <div class="done-content content">
-                <div class="done-list list">
-                    <p class="done-list-title title">Judul</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius, nostrum numquam eum quis
-                        obcaecati sunt. Explicabo illo unde nesciunt atque nobis! Eveniet possimus dignissimos</p>
-                </div>
-                <div class="done-list list">
-                    <p class="done-list-title title">Judul</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius, nostrum numquam eum quis
-                        obcaecati sunt.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <i class="fa fa-plus-circle add-btn" style="font-size: 50px;"></i>
 </body>
-
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="./script/main.js"></script>
 </html>
