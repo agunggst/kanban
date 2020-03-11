@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Kanban</title>
+    <link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-wordpress-admin/wordpress-admin.css" rel="stylesheet">
+    <!-- <link rel="stylesheet" href="@sweetalert2/theme-borderless/borderless.css"> -->
+    <title>K4NBAN</title>
 </head>
 
 <body>
@@ -15,22 +17,26 @@
             <h4>K4NBAN</h3>
                 <nav>
                     <ul class="nav_link">
-                        <li><button class="button-li" id="login-btn" v-if="!isLogin" v-on:click="showLogin">Login</button></li>
-                        <li><button class="button-li" id="register-btn" v-if="!isLogin" v-on:click="showRegister">Register</button></li>
-                        <li><button class="button-li" id="logout-btn" v-if="isLogin" v-on:click="logout">Logout</button></li>
+                        <li><button class="button-li" id="login-btn" v-if="!isLogin"
+                                v-on:click="showLogin">Login</button></li>
+                        <li><button class="button-li" id="register-btn" v-if="!isLogin"
+                                v-on:click="showRegister">Register</button></li>
+                        <li><button class="button-li" id="logout-btn" v-if="isLogin" v-on:click="logout">Logout</button>
+                        </li>
                     </ul>
                 </nav>
         </header>
+        
         <div class="box login-box user-access" v-if="!isLogin && regis_login">
             <div class="box-title">
                 <h4 class="login-title">Login</h4>
             </div>
-            <form method="POST">
+            <form v-on:submit.prevent="login">
                 <div class="textbox">
-                    <input type="text" id="login-email" placeholder="Email Address">
+                    <input type="text" id="login-email" placeholder="Email Address" v-model="login_email">
                 </div>
                 <div class="textbox">
-                    <input type="password" id="login-password" placeholder="Password">
+                    <input type="password" id="login-password" placeholder="Password" v-model="login_password">
                 </div>
                 <button id="login-submit" class="submit-btn">Sign In</button>
             </form>
@@ -40,20 +46,21 @@
                 <!-- <button id="login-submit" class="login-btn">Sign In</button> -->
             </div>
         </div>
-    
+
         <div class="box register-box user-access" v-if="!isLogin && !regis_login">
             <div class="box-title">
                 <h4 class="register-title">Register</h4>
             </div>
-            <form method="POST">
+            <form v-on:submit.prevent="register">
                 <div class="textbox">
-                    <input type="text" id="register-name" placeholder="Name">
+                    <input type="text" id="register-name" placeholder="Name" v-model="register_name">
                 </div>
                 <div class="textbox">
-                    <input type="text" id="register-email" placeholder="Email Address">
+                    <input type="text" id="register-email" placeholder="Email Address" v-model="register_email">
                 </div>
                 <div class="textbox">
-                    <input type="password" id="register-password" placeholder="Password">
+                    <input type="password" id="register-password" placeholder="Password"
+                        v-model="register_password">
                 </div>
                 <button id="register-submit" class="submit-btn">Sign Up</button>
             </form>
@@ -64,10 +71,11 @@
                 <!-- <button id="login-submit" class="login-btn">Sign In</button> -->
             </div>
         </div>
-    
+
         <div class="user_info-container box" v-if="isLogin">
             <h4 class="user_name box-title" id="user_name"> John Doe is a Gay </h4>
         </div>
+        
         <div class="flex-container box" v-if="isLogin">
             <div class="kanban-box backlog">
                 <h5>Backlog</h5>
@@ -75,7 +83,7 @@
                     <!-- Isi BackLog -->
                     <div class="backlog-list list" v-for="content in backlog_content">
                         <p class="backlog-list-title title">{{ content.title }}</p>
-                        <p>{{ content.description }}</p><i class="fa fa-trash"></i>
+                        <p>{{ content.description }}</p>
                     </div>
                 </div>
             </div>
@@ -109,12 +117,33 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
         <i class="fa fa-plus-circle add-btn" style="font-size: 50px;" v-if="isLogin"></i>
+
+        <button class="button" @click="fcshowModal">
+            Show Modal
+        </button>
+        <transition name="fade" appear>
+            <div class="modal-overlay" v-if="showModal" @click="fcshowModal"></div>
+        </transition>
+        <transition name="slide" appear>
+            <div class="modal" v-if="showModal">
+                <h1>Lorem Ipsum</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem provident explicabo accusamus
+                    laudantium voluptatum nobis sed nesciunt neque possimus molestiae?</p>
+                <button class="button" @click="fcshowModal">
+                    Close Modal
+                </button>
+            </div>
+        </transition>
     </div>
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@9/dist/sweetalert2.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script> -->
 <script src="./script/main.js"></script>
+
 </html>

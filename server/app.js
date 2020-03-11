@@ -13,5 +13,5 @@ app.use('/', require('./routers'))
 app.use(require('./errorHandler/errorHandler'))
 
 app.listen(port, () => {
-    console.log('This Server is Runnong on Port: ', port)
+    console.log('This Server is Running on Port: ', port)
 })
