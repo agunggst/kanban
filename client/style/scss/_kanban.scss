@@ -16,6 +16,7 @@
     border-radius: 10px;
     background-color: $color-secondary;
     margin: 0 1% 1rem 1%;
+    min-height: 100px;
     h5{
         text-align: center;
         margin-top: 0px;
@@ -29,16 +30,16 @@
     background-color: $color-backlog;
 }
 
-.product h5{
-    background-color: $color-product;
-}
-
-.development h5{
-    background-color: $color-development;
+.todo h5{
+    background-color: $color-todo;
 }
 
 .done h5{
     background-color: $color-done;
+}
+
+.completed h5{
+    background-color: $color-completed;
 }
 
 .kanban-box:hover{
@@ -64,20 +65,20 @@
     margin: 5px 5px 5px 5px;
 }
 
-.product-list{
-    border: 3px solid $color-product;
-    border-radius: 10px;
-    margin: 5px 5px 5px 5px;
-}
-
-.development-list{
-    border: 3px solid $color-development;
+.todo-list{
+    border: 3px solid $color-todo;
     border-radius: 10px;
     margin: 5px 5px 5px 5px;
 }
 
 .done-list{
     border: 3px solid $color-done;
+    border-radius: 10px;
+    margin: 5px 5px 5px 5px;
+}
+
+.completed-list{
+    border: 3px solid $color-completed;
     border-radius: 10px;
     margin: 5px 5px 5px 5px;
 }

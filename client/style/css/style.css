@@ -64,6 +64,7 @@ li, .button-li {
   border-radius: 10px;
   background-color: #8c8f97;
   margin: 0 1% 1rem 1%;
+  min-height: 100px;
 }
 .kanban-box h5 {
   text-align: center;
@@ -77,15 +78,15 @@ li, .button-li {
   background-color: #463b3f;
 }
 
-.product h5 {
+.todo h5 {
   background-color: #475f82;
 }
 
-.development h5 {
+.done h5 {
   background-color: #dcc8ad;
 }
 
-.done h5 {
+.completed h5 {
   background-color: #97b3d4;
 }
 
@@ -109,19 +110,19 @@ li, .button-li {
   margin: 5px 5px 5px 5px;
 }
 
-.product-list {
+.todo-list {
   border: 3px solid #475f82;
   border-radius: 10px;
   margin: 5px 5px 5px 5px;
 }
 
-.development-list {
+.done-list {
   border: 3px solid #dcc8ad;
   border-radius: 10px;
   margin: 5px 5px 5px 5px;
 }
 
-.done-list {
+.completed-list {
   border: 3px solid #97b3d4;
   border-radius: 10px;
   margin: 5px 5px 5px 5px;
@@ -189,6 +190,11 @@ li, .button-li {
   cursor: pointer;
   color: #007a99;
   margin: inherit;
+  transition: color 1s;
+}
+
+.action-button span:hover {
+  color: #edf0f1;
 }
 
 .register-btn, .login-btn {

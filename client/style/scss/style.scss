@@ -6,9 +6,9 @@ $color-secondary: rgba(140, 143, 151, 1);
 $color-font-nav: #edf0f1;
 $color-button-blue: #007a99;
 $color-backlog: #463b3f;
-$color-product: #475f82;
-$color-development: #dcc8ad;
-$color-done: #97b3d4;
+$color-todo: #475f82;
+$color-done: #dcc8ad;
+$color-completed: #97b3d4;
 
 body{
     margin: 0;
@@ -60,6 +60,11 @@ body{
     cursor: pointer;
     color: $color-button-blue;
     margin: inherit;
+    transition: color 1s;
+}
+
+.action-button span:hover{
+    color: $color-font-nav;
 }
 
 .register-btn, .login-btn{
