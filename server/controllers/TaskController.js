@@ -34,6 +34,24 @@ class TaskController {
         } )
     }
 
+    static readById(request, response, next){
+        let task_id = request.params.id
+        Task.findByPk(task_id)
+        .then( result => {
+            if(result){
+                response.status(200).json(result)
+            }else{
+                throw {
+                    status_code: 404,
+                    message: 'Task Not Found'
+                }
+            }
+        } )
+        .catch( err => {
+            next(err)
+        } )
+    }
+
     static update(request, response, next){
         let task_id = request.params.id
         let newData = {

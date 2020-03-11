@@ -32,8 +32,8 @@ class UserController {
                     id: data_user.id,
                     name: data_user.name,
                     email: data_user.email
-                })
-                response.status(200).json(token)
+                }, process.env.JWT_SECRET)
+                response.status(200).json({access_token: token})
             }else{
                 throw {
                     status_code: 400,

@@ -1,6 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  class Task extends sequelize.sequelize.Model {}
+  class Task extends sequelize.Sequelize.Model {}
 
   Task.init({
     title: {
