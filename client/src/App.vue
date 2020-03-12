@@ -125,7 +125,7 @@
             </div>
         </div>
 
-        <add v-bind:isLogin="isLogin" v-on:showAddTaskModal="showAddTaskModal"></add>
+        <addForm v-bind:isLogin="isLogin" v-on:showAddTaskModal="showAddTaskModal"></addForm>
     </div>
 </template>
 <script>
@@ -134,7 +134,7 @@ import backlog from './components/backlog'
 import todo from './components/todo'
 import done from './components/done'
 import completed from './components/completed'
-import add from './components/addTask'
+import addForm from './components/addTaskForm'
 
 export default {
     components: {
@@ -142,7 +142,7 @@ export default {
         todo,
         done,
         completed,
-        add
+        addForm
     },
     data: function() {
         return {
