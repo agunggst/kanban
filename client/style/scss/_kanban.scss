@@ -1,0 +1,179 @@
+.user_name, .box-title{
+    text-align: center;
+    color: $color-font-nav;
+    font-size: 20px;
+}
+
+.flex-container{
+    display: flex;
+    justify-content: space-between;
+    margin: 0 4% 0 4%;
+}
+
+.kanban-box{
+    height: 100%;
+    width: 40%;
+    border-radius: 10px;
+    background-color: $color-secondary;
+    margin: 0 1% 1rem 1%;
+    min-height: 100px;
+    h5{
+        text-align: center;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        padding: 10px;
+        border-radius: 10px 10px 0 0;
+    }
+}
+
+.backlog h5{
+    background-color: $color-backlog;
+}
+
+.todo h5{
+    background-color: $color-todo;
+}
+
+.done h5{
+    background-color: $color-done;
+}
+
+.completed h5{
+    background-color: $color-completed;
+}
+
+.kanban-box:hover{
+    animation: glow .5s ease-out infinite alternate;
+}
+
+@keyframes glow{
+    0%{
+        border-color: #181818;
+        box-shadow: 0 0 2px rgba(192, 192, 192, 0.2),
+                    inset 0 0 5px rgba(0, 0, 0, .1);
+    };
+    100%{
+        border-color: #181818;
+        box-shadow: 0 0 10px rgb(235, 233, 233),
+                    inset 0 0 10px rgba(0, 0, 0, .1);
+    };
+}
+
+.backlog-list{
+    border: 3px solid $color-backlog;
+    border-radius: 10px;
+    margin: 5px 5px 5px 5px;
+}
+
+.todo-list{
+    border: 3px solid $color-todo;
+    border-radius: 10px;
+    margin: 5px 5px 5px 5px;
+}
+
+.done-list{
+    border: 3px solid $color-done;
+    border-radius: 10px;
+    margin: 5px 5px 5px 5px;
+}
+
+.completed-list{
+    border: 3px solid $color-completed;
+    border-radius: 10px;
+    margin: 5px 5px 5px 5px;
+}
+
+.content p{
+    margin: 5px;
+}
+
+.content .title{
+    text-align: center;
+    font-weight: bold;
+}
+
+.list{
+    cursor: pointer;
+}
+
+.add-btn{
+    position: fixed;
+    bottom: 20px;
+    right: 25px;
+    color: whitesmoke;
+    cursor: pointer;
+}
+
+.delete-btn{
+    margin-right: 3px;
+}
+
+.user-access {
+    max-width: 500px;
+    margin: 6rem auto 2rem auto;
+    border-radius: 10px;
+    padding: 2rem;
+    background-color: $color-primary;
+}
+
+.user-access form {
+    margin: .5rem 0;
+    border-bottom: 3px solid black;
+    padding-bottom: 1rem;
+}
+
+.box-title h4 {
+    margin: 0;
+}
+
+.textbox input {
+    margin: .5rem 0;
+    padding: .5rem .5rem;
+    width: 95%;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: black;
+    color: blanchedalmond;
+}
+
+.textbox input:focus {
+    animation: glow .5s ease-out infinite alternate;
+}
+
+.action-button {
+    display: grid;
+    margin-top: 5px;
+}
+
+.action-button span {
+    cursor: pointer;
+    color: $color-button-blue;
+    margin: inherit;
+    transition: color 1s;
+}
+
+.action-button span:hover {
+    color: $color-font-nav;
+}
+
+.register-btn,
+.login-btn {
+    margin: 1rem 0 0 0;
+}
+
+.submit-btn {
+    margin: 1rem 0 0 0;
+    color: $color-font-nav;
+    font-weight: 500;
+    font-size: 16px;
+    text-decoration: none;
+    background-color: $color-button-blue;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    padding: 9px 15px;
+}
+
+.submit-btn:hover {
+    background-color: #00576d;
+}
