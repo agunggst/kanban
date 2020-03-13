@@ -96,6 +96,7 @@ import done from './components/done'
 import completed from './components/completed'
 import addForm from './components/addTaskForm'
 import regislogin from './components/regis_login'
+const rootUrl = 'http://localhost:3000'
 
 export default {
     components: {
@@ -146,7 +147,7 @@ export default {
             }
             axios({
                 method: 'post',
-                url: 'http://localhost:3000/tasks',
+                url: `${rootUrl}/tasks`,
                 headers: {
                     access_token: localStorage.getItem('access_token')
                 },
@@ -175,7 +176,7 @@ export default {
         fillContent: function() {
             axios({
                 method: 'get',
-                url: 'http://localhost:3000/tasks',
+                url: `${rootUrl}/tasks`,
                 headers:{
                     access_token: localStorage.getItem('access_token')
                 }

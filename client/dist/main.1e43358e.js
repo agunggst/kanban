@@ -10638,6 +10638,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+var rootUrl = 'http://localhost:3000';
 var _default = {
   props: ['backlog_content'],
   data: function data() {
@@ -10663,10 +10664,9 @@ var _default = {
         confirmButtonText: 'Yes, delete it!'
       }).then(function (result) {
         if (result.value) {
-          console.log(id, 'id delete');
           (0, _axios.default)({
             method: 'delete',
-            url: "http://localhost:3000/tasks/".concat(id),
+            url: "".concat(rootUrl, "/tasks/").concat(id),
             headers: {
               access_token: localStorage.getItem('access_token')
             }
@@ -10675,8 +10675,6 @@ var _default = {
 
             _this.$emit('deleteTask', id);
           }).catch(function (err) {
-            console.log(err.response.data, 'error ');
-
             _this.$emit('errorHandler', err);
           });
         }
@@ -10687,7 +10685,7 @@ var _default = {
 
       (0, _axios.default)({
         method: 'get',
-        url: "http://localhost:3000/tasks/".concat(id),
+        url: "".concat(rootUrl, "/tasks/").concat(id),
         headers: {
           access_token: localStorage.getItem('access_token')
         }
@@ -10713,7 +10711,7 @@ var _default = {
       };
       (0, _axios.default)({
         method: 'put',
-        url: "http://localhost:3000/tasks/".concat(this.editId),
+        url: "".concat(rootUrl, "/tasks/").concat(this.editId),
         headers: {
           access_token: localStorage.getItem('access_token')
         },
@@ -10726,8 +10724,6 @@ var _default = {
           data: newData
         });
       }).catch(function (err) {
-        console.log(err.response.data, 'error');
-
         _this3.$emit('errorHandler', err);
       });
     }
@@ -11026,6 +11022,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+var rootUrl = 'http://localhost:3000';
 var _default = {
   props: ['todo_content'],
   data: function data() {
@@ -11050,12 +11047,10 @@ var _default = {
         cancelButtonColor: '#d33',
         confirmButtonText: 'Yes, delete it!'
       }).then(function (result) {
-        console.log(id, 'id delete');
-
         if (result.value) {
           (0, _axios.default)({
             method: 'delete',
-            url: "http://localhost:3000/tasks/".concat(id),
+            url: "".concat(rootUrl, "/tasks/").concat(id),
             headers: {
               access_token: localStorage.getItem('access_token')
             }
@@ -11064,8 +11059,6 @@ var _default = {
 
             _this.$emit('deleteTask', id);
           }).catch(function (err) {
-            console.log(err.response.data, 'error ');
-
             _this.$emit('errorHandler', err);
           });
         }
@@ -11074,10 +11067,9 @@ var _default = {
     editTaskForm: function editTaskForm(id) {
       var _this2 = this;
 
-      console.log(id);
       (0, _axios.default)({
         method: 'get',
-        url: "http://localhost:3000/tasks/".concat(id),
+        url: "".concat(rootUrl, "/tasks/").concat(id),
         headers: {
           access_token: localStorage.getItem('access_token')
         }
@@ -11085,8 +11077,6 @@ var _default = {
         _this2.editTask_title = result.data.title, _this2.editTask_desc = result.data.description, _this2.editTask_category = result.data.category, _this2.editId = id;
         _this2.editModal = true;
       }).catch(function (err) {
-        console.log(err.response.data, 'error');
-
         _this2.$emit('errorHandler', err);
       });
     },
@@ -11103,7 +11093,7 @@ var _default = {
       };
       (0, _axios.default)({
         method: 'put',
-        url: "http://localhost:3000/tasks/".concat(this.editId),
+        url: "".concat(rootUrl, "/tasks/").concat(this.editId),
         headers: {
           access_token: localStorage.getItem('access_token')
         },
@@ -11116,8 +11106,6 @@ var _default = {
           data: newData
         });
       }).catch(function (err) {
-        console.log(err.response.data, 'error');
-
         _this3.$emit('errorHandler', err);
       });
     }
@@ -11412,6 +11400,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+var rootUrl = 'http://localhost:3000';
 var _default = {
   props: ['done_content'],
   data: function data() {
@@ -11439,7 +11428,7 @@ var _default = {
         if (result.value) {
           (0, _axios.default)({
             method: 'delete',
-            url: "http://localhost:3000/tasks/".concat(id),
+            url: "".concat(rootUrl, "/tasks/").concat(id),
             headers: {
               access_token: localStorage.getItem('access_token')
             }
@@ -11448,8 +11437,6 @@ var _default = {
 
             _this.$emit('deleteTask', id);
           }).catch(function (err) {
-            console.log(err, 'error ');
-
             _this.$emit('errorHandler', err);
           });
         }
@@ -11460,7 +11447,7 @@ var _default = {
 
       (0, _axios.default)({
         method: 'get',
-        url: "http://localhost:3000/tasks/".concat(id),
+        url: "".concat(rootUrl, "/tasks/").concat(id),
         headers: {
           access_token: localStorage.getItem('access_token')
         }
@@ -11468,8 +11455,6 @@ var _default = {
         _this2.editTask_title = result.data.title, _this2.editTask_desc = result.data.description, _this2.editTask_category = result.data.category, _this2.editId = id;
         _this2.editModal = true;
       }).catch(function (err) {
-        console.log(err.response.data, 'error');
-
         _this2.$emit('errorHandler', err);
       });
     },
@@ -11486,7 +11471,7 @@ var _default = {
       };
       (0, _axios.default)({
         method: 'put',
-        url: "http://localhost:3000/tasks/".concat(this.editId),
+        url: "".concat(rootUrl, "/tasks/").concat(this.editId),
         headers: {
           access_token: localStorage.getItem('access_token')
         },
@@ -11499,8 +11484,6 @@ var _default = {
           data: newData
         });
       }).catch(function (err) {
-        console.log(err.response.data, 'error');
-
         _this3.$emit('errorHandler', err);
       });
     }
@@ -11795,6 +11778,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+var rootUrl = 'http://localhost:3000';
 var _default = {
   props: ['completed_content'],
   data: function data() {
@@ -11822,7 +11806,7 @@ var _default = {
         if (result.value) {
           (0, _axios.default)({
             method: 'delete',
-            url: "http://localhost:3000/tasks/".concat(id),
+            url: "".concat(rootUrl, "/tasks/").concat(id),
             headers: {
               access_token: localStorage.getItem('access_token')
             }
@@ -11831,8 +11815,6 @@ var _default = {
 
             _this.$emit('deleteTask', id);
           }).catch(function (err) {
-            console.log(err, 'error ');
-
             _this.$emit('errorHandler', err);
           });
         }
@@ -11843,7 +11825,7 @@ var _default = {
 
       (0, _axios.default)({
         method: 'get',
-        url: "http://localhost:3000/tasks/".concat(id),
+        url: "".concat(rootUrl, "/tasks/").concat(id),
         headers: {
           access_token: localStorage.getItem('access_token')
         }
@@ -11851,8 +11833,6 @@ var _default = {
         _this2.editTask_title = result.data.title, _this2.editTask_desc = result.data.description, _this2.editTask_category = result.data.category, _this2.editId = id;
         _this2.editModal = true;
       }).catch(function (err) {
-        console.log(err.response.data, 'error');
-
         _this2.$emit('errorHandler', err);
       });
     },
@@ -11869,7 +11849,7 @@ var _default = {
       };
       (0, _axios.default)({
         method: 'put',
-        url: "http://localhost:3000/tasks/".concat(this.editId),
+        url: "".concat(rootUrl, "/tasks/").concat(this.editId),
         headers: {
           access_token: localStorage.getItem('access_token')
         },
@@ -11882,8 +11862,6 @@ var _default = {
           data: newData
         });
       }).catch(function (err) {
-        console.log(err.response.data, 'error');
-
         _this3.$emit('errorHandler', err);
       });
     }
@@ -12386,6 +12364,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+var rootUrl = 'http://localhost:3000';
 var _default = {
   props: ['isLogin', 'regis_login'],
   directives: {
@@ -12414,7 +12393,7 @@ var _default = {
 
       (0, _axios.default)({
         method: 'post',
-        url: 'http://localhost:3000/users/login',
+        url: "".concat(rootUrl, "/users/login"),
         data: {
           email: this.login_email,
           password: this.login_password
@@ -12435,7 +12414,7 @@ var _default = {
       if (this.register_password == this.register_password_confirm) {
         (0, _axios.default)({
           method: 'post',
-          url: 'http://localhost:3000/users/register',
+          url: "".concat(rootUrl, "/users/register"),
           data: {
             name: this.register_name,
             email: this.register_email,
@@ -12468,7 +12447,7 @@ var _default = {
 
       (0, _axios.default)({
         method: 'post',
-        url: 'http://localhost:3000/users/googleLogin',
+        url: "".concat(rootUrl, "/users/googleLogin"),
         data: {
           token: idToken
         }
@@ -12916,6 +12895,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+var rootUrl = 'http://localhost:3000';
 var _default = {
   components: {
     backlog: _backlog.default,
@@ -12967,7 +12947,7 @@ var _default = {
       };
       (0, _axios.default)({
         method: 'post',
-        url: 'http://localhost:3000/tasks',
+        url: "".concat(rootUrl, "/tasks"),
         headers: {
           access_token: localStorage.getItem('access_token')
         },
@@ -12997,7 +12977,7 @@ var _default = {
 
       (0, _axios.default)({
         method: 'get',
-        url: 'http://localhost:3000/tasks',
+        url: "".concat(rootUrl, "/tasks"),
         headers: {
           access_token: localStorage.getItem('access_token')
         }
@@ -13478,7 +13458,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "38987" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "36939" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

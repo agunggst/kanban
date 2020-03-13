@@ -54,6 +54,7 @@
 <script>
 import axios from 'axios'
 import GoogleSignInButton from 'vue-google-signin-button-directive'
+const rootUrl = 'http://localhost:3000'
 
 export default {
     props: ['isLogin', 'regis_login'],
@@ -81,7 +82,7 @@ export default {
         login: function() {
             axios({
                 method: 'post',
-                url: 'http://localhost:3000/users/login',
+                url: `${rootUrl}/users/login`,
                 data: {
                     email: this.login_email,
                     password: this.login_password
@@ -101,7 +102,7 @@ export default {
             if(this.register_password == this.register_password_confirm){
                 axios({
                     method: 'post',
-                    url: 'http://localhost:3000/users/register',
+                    url: `${rootUrl}/users/register`,
                     data: {
                         name: this.register_name,
                         email: this.register_email,
@@ -133,7 +134,7 @@ export default {
         OnGoogleAuthSuccess: function(idToken) {
             axios({
                 method: 'post',
-                url: 'http://localhost:3000/users/googleLogin',
+                url: `${rootUrl}/users/googleLogin`,
                 data: {
                     token: idToken
                 }

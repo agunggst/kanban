@@ -46,6 +46,8 @@
 </template>
 <script>
 import axios from 'axios'
+const rootUrl = 'http://localhost:3000'
+
 export default {
     props:['todo_content'],
     data: function() {
@@ -68,11 +70,10 @@ export default {
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
-                console.log(id, 'id delete')
                 if (result.value) {
                     axios({
                         method: 'delete',
-                        url: `http://localhost:3000/tasks/${id}`,
+                        url: `${rootUrl}/tasks/${id}`,
                         headers: {
                             access_token: localStorage.getItem('access_token')
                         }
@@ -86,17 +87,15 @@ export default {
                         this.$emit('deleteTask', id)
                     } )
                     .catch( err => {
-                        console.log(err.response.data, 'error ')
                         this.$emit('errorHandler', err)
                     } )
                 }
             })
         },
         editTaskForm: function(id) {
-            console.log(id)
             axios({
                 method: 'get',
-                url: `http://localhost:3000/tasks/${id}`,
+                url: `${rootUrl}/tasks/${id}`,
                 headers: {
                     access_token: localStorage.getItem('access_token')
                 }
@@ -109,7 +108,6 @@ export default {
                 this.editModal = true
             } )
             .catch( err => {
-                console.log(err.response.data, 'error')
                 this.$emit('errorHandler', err)
             } )
         },
@@ -124,7 +122,7 @@ export default {
             }
             axios({
                 method: 'put',
-                url: `http://localhost:3000/tasks/${this.editId}`,
+                url: `${rootUrl}/tasks/${this.editId}`,
                 headers: {
                     access_token: localStorage.getItem('access_token')
                 },
@@ -138,7 +136,6 @@ export default {
                 })
             } )
             .catch( err => {
-                console.log(err.response.data, 'error')
                 this.$emit('errorHandler', err)
             } )
         }

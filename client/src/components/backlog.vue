@@ -46,6 +46,8 @@
 </template>
 <script>
 import axios from 'axios'
+const rootUrl = 'http://localhost:3000'
+
 export default {
     props: ['backlog_content'],
     data: function() {
@@ -69,10 +71,9 @@ export default {
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.value) {
-                    console.log(id, 'id delete')
                     axios({
                         method: 'delete',
-                        url: `http://localhost:3000/tasks/${id}`,
+                        url: `${rootUrl}/tasks/${id}`,
                         headers: {
                             access_token: localStorage.getItem('access_token')
                         }
@@ -86,7 +87,6 @@ export default {
                         this.$emit('deleteTask', id)
                     } )
                     .catch( err => {
-                        console.log(err.response.data, 'error ')
                         this.$emit('errorHandler', err)
                     } )
                 }
@@ -95,7 +95,7 @@ export default {
         editTaskForm: function(id) {
             axios({
                 method: 'get',
-                url: `http://localhost:3000/tasks/${id}`,
+                url: `${rootUrl}/tasks/${id}`,
                 headers: {
                     access_token: localStorage.getItem('access_token')
                 }
@@ -123,7 +123,7 @@ export default {
             }
             axios({
                 method: 'put',
-                url: `http://localhost:3000/tasks/${this.editId}`,
+                url: `${rootUrl}/tasks/${this.editId}`,
                 headers: {
                     access_token: localStorage.getItem('access_token')
                 },
@@ -137,7 +137,6 @@ export default {
                 })
             } )
             .catch( err => {
-                console.log(err.response.data, 'error')
                 this.$emit('errorHandler', err)
             } )
         }
