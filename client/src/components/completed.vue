@@ -11,6 +11,7 @@
         </div>
 
         <!-- Edit Modal -->
+        <transition name="bounce">
         <div class="editModal modal" v-if="editModal">
             <div class="modal-content">
                 <div class="x" v-on:click="closeEditModal">+</div>
@@ -39,6 +40,7 @@
                 </form>
             </div>
         </div>
+        </transition>
 
     </div>
 </template>

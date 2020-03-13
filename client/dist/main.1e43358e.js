@@ -10636,6 +10636,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
 var _default = {
   props: ['backlog_content'],
   data: function data() {
@@ -10785,162 +10787,159 @@ exports.default = _default;
         )
       }),
       _vm._v(" "),
-      _vm.editModal
-        ? _c("div", { staticClass: "editModal modal" }, [
-            _c("div", { staticClass: "modal-content" }, [
-              _c(
-                "div",
-                { staticClass: "x", on: { click: _vm.closeEditModal } },
-                [_vm._v("+")]
-              ),
-              _vm._v(" "),
-              _vm._m(0),
-              _vm._v(" "),
-              _c(
-                "form",
-                {
-                  on: {
-                    submit: function($event) {
-                      $event.preventDefault()
-                      return _vm.editTask($event)
+      _c("transition", { attrs: { name: "bounce" } }, [
+        _vm.editModal
+          ? _c("div", { staticClass: "editModal modal" }, [
+              _c("div", { staticClass: "modal-content" }, [
+                _c(
+                  "div",
+                  { staticClass: "x", on: { click: _vm.closeEditModal } },
+                  [_vm._v("+")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "box-title" }, [
+                  _c("h4", { staticClass: "editModal-title" }, [
+                    _vm._v("Edit Task")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "form",
+                  {
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        return _vm.editTask($event)
+                      }
                     }
-                  }
-                },
-                [
-                  _c("div", { staticClass: "textbox" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.editTask_title,
-                          expression: "editTask_title"
-                        }
-                      ],
-                      attrs: {
-                        type: "text",
-                        id: "editTask-title",
-                        placeholder: "Title"
-                      },
-                      domProps: { value: _vm.editTask_title },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.editTask_title = $event.target.value
-                        }
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "textbox" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.editTask_desc,
-                          expression: "editTask_desc"
-                        }
-                      ],
-                      attrs: {
-                        type: "text",
-                        id: "editTask-desc",
-                        placeholder: "Description"
-                      },
-                      domProps: { value: _vm.editTask_desc },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.editTask_desc = $event.target.value
-                        }
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "selectbox" }, [
-                    _c("label", { attrs: { for: "editTask-category" } }, [
-                      _vm._v("Category: ")
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "select",
-                      {
+                  },
+                  [
+                    _c("div", { staticClass: "textbox" }, [
+                      _c("input", {
                         directives: [
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.editTask_category,
-                            expression: "editTask_category"
+                            value: _vm.editTask_title,
+                            expression: "editTask_title"
                           }
                         ],
-                        attrs: { id: "editTask-category" },
+                        attrs: {
+                          type: "text",
+                          id: "editTask-title",
+                          placeholder: "Title"
+                        },
+                        domProps: { value: _vm.editTask_title },
                         on: {
-                          change: function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.editTask_category = $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.editTask_title = $event.target.value
                           }
                         }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "textbox" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.editTask_desc,
+                            expression: "editTask_desc"
+                          }
+                        ],
+                        attrs: {
+                          type: "text",
+                          id: "editTask-desc",
+                          placeholder: "Description"
+                        },
+                        domProps: { value: _vm.editTask_desc },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.editTask_desc = $event.target.value
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "selectbox" }, [
+                      _c("label", { attrs: { for: "editTask-category" } }, [
+                        _vm._v("Category: ")
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.editTask_category,
+                              expression: "editTask_category"
+                            }
+                          ],
+                          attrs: { id: "editTask-category" },
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.editTask_category = $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            }
+                          }
+                        },
+                        [
+                          _c("option", { attrs: { value: "Backlog" } }, [
+                            _vm._v("Backlog")
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "Todo" } }, [
+                            _vm._v("Todo")
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "Done" } }, [
+                            _vm._v("Done")
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "Completed" } }, [
+                            _vm._v("Completed")
+                          ])
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "submit-btn",
+                        attrs: { id: "editTask-submit" }
                       },
-                      [
-                        _c("option", { attrs: { value: "Backlog" } }, [
-                          _vm._v("Backlog")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "Todo" } }, [
-                          _vm._v("Todo")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "Done" } }, [
-                          _vm._v("Done")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "Completed" } }, [
-                          _vm._v("Completed")
-                        ])
-                      ]
+                      [_vm._v("Edit")]
                     )
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "submit-btn",
-                      attrs: { id: "editTask-submit" }
-                    },
-                    [_vm._v("Edit")]
-                  )
-                ]
-              )
+                  ]
+                )
+              ])
             ])
-          ])
-        : _vm._e()
+          : _vm._e()
+      ])
     ],
     2
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "box-title" }, [
-      _c("h4", { staticClass: "editModal-title" }, [_vm._v("Edit Task")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
           return {
@@ -10981,6 +10980,8 @@ var _axios = _interopRequireDefault(require("axios"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//
+//
 //
 //
 //
@@ -11172,162 +11173,159 @@ exports.default = _default;
         ])
       }),
       _vm._v(" "),
-      _vm.editModal
-        ? _c("div", { staticClass: "editModal modal" }, [
-            _c("div", { staticClass: "modal-content" }, [
-              _c(
-                "div",
-                { staticClass: "x", on: { click: _vm.closeEditModal } },
-                [_vm._v("+")]
-              ),
-              _vm._v(" "),
-              _vm._m(0),
-              _vm._v(" "),
-              _c(
-                "form",
-                {
-                  on: {
-                    submit: function($event) {
-                      $event.preventDefault()
-                      return _vm.editTask($event)
+      _c("transition", { attrs: { name: "bounce" } }, [
+        _vm.editModal
+          ? _c("div", { staticClass: "editModal modal" }, [
+              _c("div", { staticClass: "modal-content" }, [
+                _c(
+                  "div",
+                  { staticClass: "x", on: { click: _vm.closeEditModal } },
+                  [_vm._v("+")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "box-title" }, [
+                  _c("h4", { staticClass: "editModal-title" }, [
+                    _vm._v("Edit Task")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "form",
+                  {
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        return _vm.editTask($event)
+                      }
                     }
-                  }
-                },
-                [
-                  _c("div", { staticClass: "textbox" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.editTask_title,
-                          expression: "editTask_title"
-                        }
-                      ],
-                      attrs: {
-                        type: "text",
-                        id: "editTask-title",
-                        placeholder: "Title"
-                      },
-                      domProps: { value: _vm.editTask_title },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.editTask_title = $event.target.value
-                        }
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "textbox" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.editTask_desc,
-                          expression: "editTask_desc"
-                        }
-                      ],
-                      attrs: {
-                        type: "text",
-                        id: "editTask-desc",
-                        placeholder: "Description"
-                      },
-                      domProps: { value: _vm.editTask_desc },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.editTask_desc = $event.target.value
-                        }
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "selectbox" }, [
-                    _c("label", { attrs: { for: "editTask-category" } }, [
-                      _vm._v("Category: ")
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "select",
-                      {
+                  },
+                  [
+                    _c("div", { staticClass: "textbox" }, [
+                      _c("input", {
                         directives: [
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.editTask_category,
-                            expression: "editTask_category"
+                            value: _vm.editTask_title,
+                            expression: "editTask_title"
                           }
                         ],
-                        attrs: { id: "editTask-category" },
+                        attrs: {
+                          type: "text",
+                          id: "editTask-title",
+                          placeholder: "Title"
+                        },
+                        domProps: { value: _vm.editTask_title },
                         on: {
-                          change: function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.editTask_category = $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.editTask_title = $event.target.value
                           }
                         }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "textbox" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.editTask_desc,
+                            expression: "editTask_desc"
+                          }
+                        ],
+                        attrs: {
+                          type: "text",
+                          id: "editTask-desc",
+                          placeholder: "Description"
+                        },
+                        domProps: { value: _vm.editTask_desc },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.editTask_desc = $event.target.value
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "selectbox" }, [
+                      _c("label", { attrs: { for: "editTask-category" } }, [
+                        _vm._v("Category: ")
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.editTask_category,
+                              expression: "editTask_category"
+                            }
+                          ],
+                          attrs: { id: "editTask-category" },
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.editTask_category = $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            }
+                          }
+                        },
+                        [
+                          _c("option", { attrs: { value: "Backlog" } }, [
+                            _vm._v("Backlog")
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "Todo" } }, [
+                            _vm._v("Todo")
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "Done" } }, [
+                            _vm._v("Done")
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "Completed" } }, [
+                            _vm._v("Completed")
+                          ])
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "submit-btn",
+                        attrs: { id: "editTask-submit" }
                       },
-                      [
-                        _c("option", { attrs: { value: "Backlog" } }, [
-                          _vm._v("Backlog")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "Todo" } }, [
-                          _vm._v("Todo")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "Done" } }, [
-                          _vm._v("Done")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "Completed" } }, [
-                          _vm._v("Completed")
-                        ])
-                      ]
+                      [_vm._v("Edit")]
                     )
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "submit-btn",
-                      attrs: { id: "editTask-submit" }
-                    },
-                    [_vm._v("Edit")]
-                  )
-                ]
-              )
+                  ]
+                )
+              ])
             ])
-          ])
-        : _vm._e()
+          : _vm._e()
+      ])
     ],
     2
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "box-title" }, [
-      _c("h4", { staticClass: "editModal-title" }, [_vm._v("Edit Task")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
           return {
@@ -11368,6 +11366,8 @@ var _axios = _interopRequireDefault(require("axios"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//
+//
 //
 //
 //
@@ -11556,162 +11556,159 @@ exports.default = _default;
         ])
       }),
       _vm._v(" "),
-      _vm.editModal
-        ? _c("div", { staticClass: "editModal modal" }, [
-            _c("div", { staticClass: "modal-content" }, [
-              _c(
-                "div",
-                { staticClass: "x", on: { click: _vm.closeEditModal } },
-                [_vm._v("+")]
-              ),
-              _vm._v(" "),
-              _vm._m(0),
-              _vm._v(" "),
-              _c(
-                "form",
-                {
-                  on: {
-                    submit: function($event) {
-                      $event.preventDefault()
-                      return _vm.editTask($event)
+      _c("transition", { attrs: { name: "bounce" } }, [
+        _vm.editModal
+          ? _c("div", { staticClass: "editModal modal" }, [
+              _c("div", { staticClass: "modal-content" }, [
+                _c(
+                  "div",
+                  { staticClass: "x", on: { click: _vm.closeEditModal } },
+                  [_vm._v("+")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "box-title" }, [
+                  _c("h4", { staticClass: "editModal-title" }, [
+                    _vm._v("Edit Task")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "form",
+                  {
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        return _vm.editTask($event)
+                      }
                     }
-                  }
-                },
-                [
-                  _c("div", { staticClass: "textbox" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.editTask_title,
-                          expression: "editTask_title"
-                        }
-                      ],
-                      attrs: {
-                        type: "text",
-                        id: "editTask-title",
-                        placeholder: "Title"
-                      },
-                      domProps: { value: _vm.editTask_title },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.editTask_title = $event.target.value
-                        }
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "textbox" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.editTask_desc,
-                          expression: "editTask_desc"
-                        }
-                      ],
-                      attrs: {
-                        type: "text",
-                        id: "editTask-desc",
-                        placeholder: "Description"
-                      },
-                      domProps: { value: _vm.editTask_desc },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.editTask_desc = $event.target.value
-                        }
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "selectbox" }, [
-                    _c("label", { attrs: { for: "editTask-category" } }, [
-                      _vm._v("Category: ")
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "select",
-                      {
+                  },
+                  [
+                    _c("div", { staticClass: "textbox" }, [
+                      _c("input", {
                         directives: [
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.editTask_category,
-                            expression: "editTask_category"
+                            value: _vm.editTask_title,
+                            expression: "editTask_title"
                           }
                         ],
-                        attrs: { id: "editTask-category" },
+                        attrs: {
+                          type: "text",
+                          id: "editTask-title",
+                          placeholder: "Title"
+                        },
+                        domProps: { value: _vm.editTask_title },
                         on: {
-                          change: function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.editTask_category = $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.editTask_title = $event.target.value
                           }
                         }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "textbox" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.editTask_desc,
+                            expression: "editTask_desc"
+                          }
+                        ],
+                        attrs: {
+                          type: "text",
+                          id: "editTask-desc",
+                          placeholder: "Description"
+                        },
+                        domProps: { value: _vm.editTask_desc },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.editTask_desc = $event.target.value
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "selectbox" }, [
+                      _c("label", { attrs: { for: "editTask-category" } }, [
+                        _vm._v("Category: ")
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.editTask_category,
+                              expression: "editTask_category"
+                            }
+                          ],
+                          attrs: { id: "editTask-category" },
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.editTask_category = $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            }
+                          }
+                        },
+                        [
+                          _c("option", { attrs: { value: "Backlog" } }, [
+                            _vm._v("Backlog")
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "Todo" } }, [
+                            _vm._v("Todo")
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "Done" } }, [
+                            _vm._v("Done")
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "Completed" } }, [
+                            _vm._v("Completed")
+                          ])
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "submit-btn",
+                        attrs: { id: "editTask-submit" }
                       },
-                      [
-                        _c("option", { attrs: { value: "Backlog" } }, [
-                          _vm._v("Backlog")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "Todo" } }, [
-                          _vm._v("Todo")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "Done" } }, [
-                          _vm._v("Done")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "Completed" } }, [
-                          _vm._v("Completed")
-                        ])
-                      ]
+                      [_vm._v("Edit")]
                     )
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "submit-btn",
-                      attrs: { id: "editTask-submit" }
-                    },
-                    [_vm._v("Edit")]
-                  )
-                ]
-              )
+                  ]
+                )
+              ])
             ])
-          ])
-        : _vm._e()
+          : _vm._e()
+      ])
     ],
     2
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "box-title" }, [
-      _c("h4", { staticClass: "editModal-title" }, [_vm._v("Edit Task")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
           return {
@@ -11752,6 +11749,8 @@ var _axios = _interopRequireDefault(require("axios"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//
+//
 //
 //
 //
@@ -11944,162 +11943,159 @@ exports.default = _default;
         )
       }),
       _vm._v(" "),
-      _vm.editModal
-        ? _c("div", { staticClass: "editModal modal" }, [
-            _c("div", { staticClass: "modal-content" }, [
-              _c(
-                "div",
-                { staticClass: "x", on: { click: _vm.closeEditModal } },
-                [_vm._v("+")]
-              ),
-              _vm._v(" "),
-              _vm._m(0),
-              _vm._v(" "),
-              _c(
-                "form",
-                {
-                  on: {
-                    submit: function($event) {
-                      $event.preventDefault()
-                      return _vm.editTask($event)
+      _c("transition", { attrs: { name: "bounce" } }, [
+        _vm.editModal
+          ? _c("div", { staticClass: "editModal modal" }, [
+              _c("div", { staticClass: "modal-content" }, [
+                _c(
+                  "div",
+                  { staticClass: "x", on: { click: _vm.closeEditModal } },
+                  [_vm._v("+")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "box-title" }, [
+                  _c("h4", { staticClass: "editModal-title" }, [
+                    _vm._v("Edit Task")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "form",
+                  {
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        return _vm.editTask($event)
+                      }
                     }
-                  }
-                },
-                [
-                  _c("div", { staticClass: "textbox" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.editTask_title,
-                          expression: "editTask_title"
-                        }
-                      ],
-                      attrs: {
-                        type: "text",
-                        id: "editTask-title",
-                        placeholder: "Title"
-                      },
-                      domProps: { value: _vm.editTask_title },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.editTask_title = $event.target.value
-                        }
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "textbox" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.editTask_desc,
-                          expression: "editTask_desc"
-                        }
-                      ],
-                      attrs: {
-                        type: "text",
-                        id: "editTask-desc",
-                        placeholder: "Description"
-                      },
-                      domProps: { value: _vm.editTask_desc },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.editTask_desc = $event.target.value
-                        }
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "selectbox" }, [
-                    _c("label", { attrs: { for: "editTask-category" } }, [
-                      _vm._v("Category: ")
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "select",
-                      {
+                  },
+                  [
+                    _c("div", { staticClass: "textbox" }, [
+                      _c("input", {
                         directives: [
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.editTask_category,
-                            expression: "editTask_category"
+                            value: _vm.editTask_title,
+                            expression: "editTask_title"
                           }
                         ],
-                        attrs: { id: "editTask-category" },
+                        attrs: {
+                          type: "text",
+                          id: "editTask-title",
+                          placeholder: "Title"
+                        },
+                        domProps: { value: _vm.editTask_title },
                         on: {
-                          change: function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.editTask_category = $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.editTask_title = $event.target.value
                           }
                         }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "textbox" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.editTask_desc,
+                            expression: "editTask_desc"
+                          }
+                        ],
+                        attrs: {
+                          type: "text",
+                          id: "editTask-desc",
+                          placeholder: "Description"
+                        },
+                        domProps: { value: _vm.editTask_desc },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.editTask_desc = $event.target.value
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "selectbox" }, [
+                      _c("label", { attrs: { for: "editTask-category" } }, [
+                        _vm._v("Category: ")
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.editTask_category,
+                              expression: "editTask_category"
+                            }
+                          ],
+                          attrs: { id: "editTask-category" },
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.editTask_category = $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            }
+                          }
+                        },
+                        [
+                          _c("option", { attrs: { value: "Backlog" } }, [
+                            _vm._v("Backlog")
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "Todo" } }, [
+                            _vm._v("Todo")
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "Done" } }, [
+                            _vm._v("Done")
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "Completed" } }, [
+                            _vm._v("Completed")
+                          ])
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "submit-btn",
+                        attrs: { id: "editTask-submit" }
                       },
-                      [
-                        _c("option", { attrs: { value: "Backlog" } }, [
-                          _vm._v("Backlog")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "Todo" } }, [
-                          _vm._v("Todo")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "Done" } }, [
-                          _vm._v("Done")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "Completed" } }, [
-                          _vm._v("Completed")
-                        ])
-                      ]
+                      [_vm._v("Edit")]
                     )
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "submit-btn",
-                      attrs: { id: "editTask-submit" }
-                    },
-                    [_vm._v("Edit")]
-                  )
-                ]
-              )
+                  ]
+                )
+              ])
             ])
-          ])
-        : _vm._e()
+          : _vm._e()
+      ])
     ],
     2
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "box-title" }, [
-      _c("h4", { staticClass: "editModal-title" }, [_vm._v("Edit Task")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
           return {
@@ -12419,6 +12415,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 var _default = {
   components: {
     backlog: _backlog.default,
@@ -12439,6 +12442,7 @@ var _default = {
       register_name: '',
       register_email: '',
       register_password: '',
+      register_password_confirm: '',
       addTask_title: '',
       addTask_desc: '',
       addTask_category: ''
@@ -12541,25 +12545,37 @@ var _default = {
     register: function register() {
       var _this4 = this;
 
-      (0, _axios.default)({
-        method: 'post',
-        url: 'http://localhost:3000/users/register',
-        data: {
-          name: this.register_name,
-          email: this.register_email,
-          password: this.register_password
-        }
-      }).then(function (result) {
-        _this4.isLogin = true;
-        _this4.register_name = null;
-        _this4.register_email = null;
-        _this4.register_password = null;
-        localStorage.setItem('access_token', result.data.access_token);
+      if (this.register_password == this.register_password_confirm) {
+        (0, _axios.default)({
+          method: 'post',
+          url: 'http://localhost:3000/users/register',
+          data: {
+            name: this.register_name,
+            email: this.register_email,
+            password: this.register_password
+          }
+        }).then(function (result) {
+          _this4.isLogin = true;
+          _this4.register_name = '';
+          _this4.register_email = '';
+          _this4.register_password = '';
+          _this4.register_password_confirm = '';
+          localStorage.setItem('access_token', result.data.access_token);
 
-        _this4.fillContent();
-      }).catch(function (err) {
-        _this4.errorHandler(err);
-      });
+          _this4.fillContent();
+        }).catch(function (err) {
+          _this4.errorHandler(err);
+        });
+      } else {
+        var error = {
+          response: {
+            data: {
+              message: 'Password Does\'nt Match'
+            }
+          }
+        };
+        this.errorHandler(error);
+      }
     },
     deleteTask: function deleteTask(id) {
       var temp = [];
@@ -12691,7 +12707,7 @@ exports.default = _default;
                       }
                     ],
                     attrs: {
-                      type: "text",
+                      type: "email",
                       id: "login-email",
                       placeholder: "Email Address"
                     },
@@ -12805,7 +12821,7 @@ exports.default = _default;
                       }
                     ],
                     attrs: {
-                      type: "text",
+                      type: "email",
                       id: "register-email",
                       placeholder: "Email Address"
                     },
@@ -12843,6 +12859,33 @@ exports.default = _default;
                           return
                         }
                         _vm.register_password = $event.target.value
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "textbox" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.register_password_confirm,
+                        expression: "register_password_confirm"
+                      }
+                    ],
+                    attrs: {
+                      type: "password",
+                      id: "register-password",
+                      placeholder: "Confirm Password"
+                    },
+                    domProps: { value: _vm.register_password_confirm },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.register_password_confirm = $event.target.value
                       }
                     }
                   })
@@ -12990,148 +13033,154 @@ exports.default = _default;
           ])
         : _vm._e(),
       _vm._v(" "),
-      _vm.addModal
-        ? _c("div", { staticClass: "addModal modal" }, [
-            _c("div", { staticClass: "modal-content" }, [
-              _c(
-                "div",
-                { staticClass: "x", on: { click: _vm.closeAddModal } },
-                [_vm._v("+")]
-              ),
-              _vm._v(" "),
-              _vm._m(2),
-              _vm._v(" "),
-              _c(
-                "form",
-                {
-                  on: {
-                    submit: function($event) {
-                      $event.preventDefault()
-                      return _vm.addTask($event)
+      _c("transition", { attrs: { name: "bounce" } }, [
+        _vm.addModal
+          ? _c("div", { staticClass: "addModal modal" }, [
+              _c("div", { staticClass: "modal-content" }, [
+                _c(
+                  "div",
+                  { staticClass: "x", on: { click: _vm.closeAddModal } },
+                  [_vm._v("+")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "box-title" }, [
+                  _c("h4", { staticClass: "addTask-title" }, [
+                    _vm._v("Add Task")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "form",
+                  {
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        return _vm.addTask($event)
+                      }
                     }
-                  }
-                },
-                [
-                  _c("div", { staticClass: "textbox" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.addTask_title,
-                          expression: "addTask_title"
-                        }
-                      ],
-                      attrs: {
-                        type: "text",
-                        id: "addTask-title",
-                        placeholder: "Title"
-                      },
-                      domProps: { value: _vm.addTask_title },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.addTask_title = $event.target.value
-                        }
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "textbox" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.addTask_desc,
-                          expression: "addTask_desc"
-                        }
-                      ],
-                      attrs: {
-                        type: "text",
-                        id: "addTask-desc",
-                        placeholder: "Description"
-                      },
-                      domProps: { value: _vm.addTask_desc },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.addTask_desc = $event.target.value
-                        }
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "selectbox" }, [
-                    _c("label", { attrs: { for: "addTask-category" } }, [
-                      _vm._v("Category: ")
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "select",
-                      {
+                  },
+                  [
+                    _c("div", { staticClass: "textbox" }, [
+                      _c("input", {
                         directives: [
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.addTask_category,
-                            expression: "addTask_category"
+                            value: _vm.addTask_title,
+                            expression: "addTask_title"
                           }
                         ],
-                        attrs: { id: "addTask-category" },
+                        attrs: {
+                          type: "text",
+                          id: "addTask-title",
+                          placeholder: "Title"
+                        },
+                        domProps: { value: _vm.addTask_title },
                         on: {
-                          change: function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.addTask_category = $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.addTask_title = $event.target.value
                           }
                         }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "textbox" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.addTask_desc,
+                            expression: "addTask_desc"
+                          }
+                        ],
+                        attrs: {
+                          type: "text",
+                          id: "addTask-desc",
+                          placeholder: "Description"
+                        },
+                        domProps: { value: _vm.addTask_desc },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.addTask_desc = $event.target.value
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "selectbox" }, [
+                      _c("label", { attrs: { for: "addTask-category" } }, [
+                        _vm._v("Category: ")
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.addTask_category,
+                              expression: "addTask_category"
+                            }
+                          ],
+                          attrs: { id: "addTask-category" },
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.addTask_category = $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            }
+                          }
+                        },
+                        [
+                          _c("option", { attrs: { value: "Backlog" } }, [
+                            _vm._v("Backlog")
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "Todo" } }, [
+                            _vm._v("Todo")
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "Done" } }, [
+                            _vm._v("Done")
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "Completed" } }, [
+                            _vm._v("Completed")
+                          ])
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "submit-btn",
+                        attrs: { id: "addTask-submit" }
                       },
-                      [
-                        _c("option", { attrs: { value: "Backlog" } }, [
-                          _vm._v("Backlog")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "Todo" } }, [
-                          _vm._v("Todo")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "Done" } }, [
-                          _vm._v("Done")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "Completed" } }, [
-                          _vm._v("Completed")
-                        ])
-                      ]
+                      [_vm._v("Add")]
                     )
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "submit-btn",
-                      attrs: { id: "addTask-submit" }
-                    },
-                    [_vm._v("Add")]
-                  )
-                ]
-              )
+                  ]
+                )
+              ])
             ])
-          ])
-        : _vm._e(),
+          : _vm._e()
+      ]),
       _vm._v(" "),
       _c("addForm", {
         attrs: { isLogin: _vm.isLogin },
@@ -13156,14 +13205,6 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "box-title" }, [
       _c("h4", { staticClass: "register-title" }, [_vm._v("Register")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "box-title" }, [
-      _c("h4", { staticClass: "addTask-title" }, [_vm._v("Add Task")])
     ])
   }
 ]
@@ -13238,7 +13279,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "39101" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "43603" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

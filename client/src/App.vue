@@ -20,7 +20,7 @@
             </div>
             <form v-on:submit.prevent="login">
                 <div class="textbox">
-                    <input type="text" id="login-email" placeholder="Email Address" v-model="login_email">
+                    <input type="email" id="login-email" placeholder="Email Address" v-model="login_email">
                 </div>
                 <div class="textbox">
                     <input type="password" id="login-password" placeholder="Password" v-model="login_password">
@@ -42,11 +42,15 @@
                     <input type="text" id="register-name" placeholder="Name" v-model="register_name">
                 </div>
                 <div class="textbox">
-                    <input type="text" id="register-email" placeholder="Email Address" v-model="register_email">
+                    <input type="email" id="register-email" placeholder="Email Address" v-model="register_email">
                 </div>
                 <div class="textbox">
                     <input type="password" id="register-password" placeholder="Password"
                         v-model="register_password">
+                </div>
+                <div class="textbox">
+                    <input type="password" id="register-password" placeholder="Confirm Password"
+                        v-model="register_password_confirm">
                 </div>
                 <button id="register-submit" class="submit-btn">Sign Up</button>
             </form>
@@ -93,6 +97,8 @@
         </div>
 
         <!-- Add Task Modal -->
+        
+        <transition name="bounce">
         <div class="addModal modal" v-if="addModal">
             <div class="modal-content">
                 <div class="x" v-on:click="closeAddModal">+</div>
@@ -121,6 +127,7 @@
                 </form>
             </div>
         </div>
+        </transition>
 
         <addForm v-bind:isLogin="isLogin" v-on:showAddTaskModal="showAddTaskModal"></addForm>
     </div>
@@ -153,6 +160,7 @@ export default {
             register_name: '',
             register_email: '',
             register_password: '',
+            register_password_confirm: '',
             addTask_title: '',
             addTask_desc: '',
             addTask_category: ''
@@ -252,26 +260,38 @@ export default {
             this.isLogin = false
         },
         register: function() {
-            axios({
-                method: 'post',
-                url: 'http://localhost:3000/users/register',
-                data: {
-                    name: this.register_name,
-                    email: this.register_email,
-                    password: this.register_password
+            if(this.register_password == this.register_password_confirm){
+                axios({
+                    method: 'post',
+                    url: 'http://localhost:3000/users/register',
+                    data: {
+                        name: this.register_name,
+                        email: this.register_email,
+                        password: this.register_password
+                    }
+                })
+                .then( result => {
+                    this.isLogin = true
+                    this.register_name = ''
+                    this.register_email = ''
+                    this.register_password = ''
+                    this.register_password_confirm = ''
+                    localStorage.setItem('access_token', result.data.access_token)
+                    this.fillContent()
+                } )
+                .catch( err => {
+                    this.errorHandler(err)
+                } )
+            }else{
+                let error = {
+                    response: {
+                        data: {
+                            message: 'Password Does\'nt Match'
+                        }
+                    }
                 }
-            })
-            .then( result => {
-                this.isLogin = true
-                this.register_name = null
-                this.register_email = null
-                this.register_password = null
-                localStorage.setItem('access_token', result.data.access_token)
-                this.fillContent()
-            } )
-            .catch( err => {
-                this.errorHandler(err)
-            } )
+                this.errorHandler(error)
+            }
         },
         deleteTask: function(id){
             let temp = []
