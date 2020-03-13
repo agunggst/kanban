@@ -54,7 +54,6 @@ class UserController {
             email: request.body.email,
             password: request.body.password
         }
-        console.log(newData)
         User.findOne({
             where: {
                 email: newData.email
