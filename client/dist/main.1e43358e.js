@@ -10661,6 +10661,7 @@ var _default = {
         confirmButtonText: 'Yes, delete it!'
       }).then(function (result) {
         if (result.value) {
+          console.log(id, 'id delete');
           (0, _axios.default)({
             method: 'delete',
             url: "http://localhost:3000/tasks/".concat(id),
@@ -10673,6 +10674,8 @@ var _default = {
             _this.$emit('deleteTask', id);
           }).catch(function (err) {
             console.log(err.response.data, 'error ');
+
+            _this.$emit('errorHandler', err);
           });
         }
       });
@@ -10691,6 +10694,8 @@ var _default = {
         _this2.editModal = true;
       }).catch(function (err) {
         console.log(err.response.data, 'error');
+
+        _this2.$emit('errorHandler', err);
       });
     },
     closeEditModal: function closeEditModal() {
@@ -10720,6 +10725,8 @@ var _default = {
         });
       }).catch(function (err) {
         console.log(err.response.data, 'error');
+
+        _this3.$emit('errorHandler', err);
       });
     }
   }
@@ -11042,6 +11049,8 @@ var _default = {
         cancelButtonColor: '#d33',
         confirmButtonText: 'Yes, delete it!'
       }).then(function (result) {
+        console.log(id, 'id delete');
+
         if (result.value) {
           (0, _axios.default)({
             method: 'delete',
@@ -11054,7 +11063,9 @@ var _default = {
 
             _this.$emit('deleteTask', id);
           }).catch(function (err) {
-            console.log(err, 'error ');
+            console.log(err.response.data, 'error ');
+
+            _this.$emit('errorHandler', err);
           });
         }
       });
@@ -11062,6 +11073,7 @@ var _default = {
     editTaskForm: function editTaskForm(id) {
       var _this2 = this;
 
+      console.log(id);
       (0, _axios.default)({
         method: 'get',
         url: "http://localhost:3000/tasks/".concat(id),
@@ -11073,6 +11085,8 @@ var _default = {
         _this2.editModal = true;
       }).catch(function (err) {
         console.log(err.response.data, 'error');
+
+        _this2.$emit('errorHandler', err);
       });
     },
     closeEditModal: function closeEditModal() {
@@ -11102,6 +11116,8 @@ var _default = {
         });
       }).catch(function (err) {
         console.log(err.response.data, 'error');
+
+        _this3.$emit('errorHandler', err);
       });
     }
   }
@@ -11433,6 +11449,8 @@ var _default = {
             _this.$emit('deleteTask', id);
           }).catch(function (err) {
             console.log(err, 'error ');
+
+            _this.$emit('errorHandler', err);
           });
         }
       });
@@ -11451,6 +11469,8 @@ var _default = {
         _this2.editModal = true;
       }).catch(function (err) {
         console.log(err.response.data, 'error');
+
+        _this2.$emit('errorHandler', err);
       });
     },
     closeEditModal: function closeEditModal() {
@@ -11480,6 +11500,8 @@ var _default = {
         });
       }).catch(function (err) {
         console.log(err.response.data, 'error');
+
+        _this3.$emit('errorHandler', err);
       });
     }
   }
@@ -11811,6 +11833,8 @@ var _default = {
             _this.$emit('deleteTask', id);
           }).catch(function (err) {
             console.log(err, 'error ');
+
+            _this.$emit('errorHandler', err);
           });
         }
       });
@@ -11829,6 +11853,8 @@ var _default = {
         _this2.editModal = true;
       }).catch(function (err) {
         console.log(err.response.data, 'error');
+
+        _this2.$emit('errorHandler', err);
       });
     },
     closeEditModal: function closeEditModal() {
@@ -11858,6 +11884,8 @@ var _default = {
         });
       }).catch(function (err) {
         console.log(err.response.data, 'error');
+
+        _this3.$emit('errorHandler', err);
       });
     }
   }
@@ -12461,7 +12489,7 @@ var _default = {
         _this.addTask_category = '';
         _this.addModal = false;
 
-        _this.task.push(newData);
+        _this.task.push(result.data.data);
       }).catch(function (err) {
         _this.errorHandler(err);
       });
@@ -12877,6 +12905,9 @@ exports.default = _default;
                       },
                       editTask: function($event) {
                         return _vm.editTask($event)
+                      },
+                      errorHandler: function($event) {
+                        return _vm.errorHandler($event)
                       }
                     }
                   })
@@ -12900,6 +12931,9 @@ exports.default = _default;
                       },
                       editTask: function($event) {
                         return _vm.editTask($event)
+                      },
+                      errorHandler: function($event) {
+                        return _vm.errorHandler($event)
                       }
                     }
                   })
@@ -12923,6 +12957,9 @@ exports.default = _default;
                       },
                       editTask: function($event) {
                         return _vm.editTask($event)
+                      },
+                      errorHandler: function($event) {
+                        return _vm.errorHandler($event)
                       }
                     }
                   })
@@ -12946,6 +12983,9 @@ exports.default = _default;
                       },
                       editTask: function($event) {
                         return _vm.editTask($event)
+                      },
+                      errorHandler: function($event) {
+                        return _vm.errorHandler($event)
                       }
                     }
                   })
@@ -13204,7 +13244,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "45679" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "37619" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

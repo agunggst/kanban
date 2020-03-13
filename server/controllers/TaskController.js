@@ -10,7 +10,7 @@ class TaskController {
         }
         Task.create(newData)
         .then( result => {
-            response.status(201).json({message: 'Create Task Successfully'})
+            response.status(201).json({data: result, message: 'Create Task Successfully'})
         } )
         .catch( err => {
             next(err)

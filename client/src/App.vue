@@ -68,28 +68,28 @@
                 <h5>Backlog</h5>
                 <div class="backlog-content content">
                     <!-- Isi BackLog -->
-                    <backlog v-bind:backlog_content="backlog_content" v-on:deleteTask="deleteTask($event)" v-on:editTask="editTask($event)"></backlog>
+                    <backlog v-bind:backlog_content="backlog_content" v-on:deleteTask="deleteTask($event)" v-on:editTask="editTask($event)" v-on:errorHandler="errorHandler($event)"></backlog>
                 </div>
             </div>
             <div class="kanban-box todo">
                 <h5>Todo</h5>
                 <div class="todo-content content">
                     <!-- Isi Todo -->
-                    <todo v-bind:todo_content="todo_content" v-on:deleteTask="deleteTask($event)" v-on:editTask="editTask($event)"></todo>
+                    <todo v-bind:todo_content="todo_content" v-on:deleteTask="deleteTask($event)" v-on:editTask="editTask($event)" v-on:errorHandler="errorHandler($event)"></todo>
                 </div>
             </div>
             <div class="kanban-box done">
                 <h5>Done</h5>
                 <div class="done-content content">
                     <!-- Isi done -->
-                    <done v-bind:done_content="done_content" v-on:deleteTask="deleteTask($event)" v-on:editTask="editTask($event)"></done>
+                    <done v-bind:done_content="done_content" v-on:deleteTask="deleteTask($event)" v-on:editTask="editTask($event)" v-on:errorHandler="errorHandler($event)"></done>
                 </div>
             </div>
             <div class="kanban-box completed">
                 <h5>Completed</h5>
                 <div class="completed-content content">
                     <!-- Isi completed -->
-                    <completed v-bind:completed_content="completed_content" v-on:deleteTask="deleteTask($event)" v-on:editTask="editTask($event)"></completed>
+                    <completed v-bind:completed_content="completed_content" v-on:deleteTask="deleteTask($event)" v-on:editTask="editTask($event)" v-on:errorHandler="errorHandler($event)"></completed>
                 </div>
             </div>
 
@@ -201,7 +201,7 @@ export default {
                 this.addTask_desc = ''
                 this.addTask_category = ''
                 this.addModal = false
-                this.task.push(newData)
+                this.task.push(result.data.data)
             } )
             .catch( err => {
                 this.errorHandler(err)

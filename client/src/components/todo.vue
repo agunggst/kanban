@@ -66,6 +66,7 @@ export default {
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
+                console.log(id, 'id delete')
                 if (result.value) {
                     axios({
                         method: 'delete',
@@ -83,12 +84,14 @@ export default {
                         this.$emit('deleteTask', id)
                     } )
                     .catch( err => {
-                        console.log(err, 'error ')
+                        console.log(err.response.data, 'error ')
+                        this.$emit('errorHandler', err)
                     } )
                 }
             })
         },
         editTaskForm: function(id) {
+            console.log(id)
             axios({
                 method: 'get',
                 url: `http://localhost:3000/tasks/${id}`,
@@ -105,6 +108,7 @@ export default {
             } )
             .catch( err => {
                 console.log(err.response.data, 'error')
+                this.$emit('errorHandler', err)
             } )
         },
         closeEditModal: function() {
@@ -133,6 +137,7 @@ export default {
             } )
             .catch( err => {
                 console.log(err.response.data, 'error')
+                this.$emit('errorHandler', err)
             } )
         }
     }

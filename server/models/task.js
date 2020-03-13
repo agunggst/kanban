@@ -11,8 +11,8 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    category: DataTypes.STRING,
-    description: {
+    description: DataTypes.STRING,
+    category: {
       type: DataTypes.STRING,
       validate:{
         notEmpty: {

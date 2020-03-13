@@ -84,6 +84,7 @@ export default {
                     } )
                     .catch( err => {
                         console.log(err, 'error ')
+                        this.$emit('errorHandler', err)
                     } )
                 }
             })
@@ -105,6 +106,7 @@ export default {
             } )
             .catch( err => {
                 console.log(err.response.data, 'error')
+                this.$emit('errorHandler', err)
             } )
         },
         closeEditModal: function() {
@@ -133,6 +135,7 @@ export default {
             } )
             .catch( err => {
                 console.log(err.response.data, 'error')
+                this.$emit('errorHandler', err)
             } )
         }
     }

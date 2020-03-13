@@ -67,6 +67,7 @@ export default {
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.value) {
+                    console.log(id, 'id delete')
                     axios({
                         method: 'delete',
                         url: `http://localhost:3000/tasks/${id}`,
@@ -84,6 +85,7 @@ export default {
                     } )
                     .catch( err => {
                         console.log(err.response.data, 'error ')
+                        this.$emit('errorHandler', err)
                     } )
                 }
             })
@@ -105,6 +107,7 @@ export default {
             } )
             .catch( err => {
                 console.log(err.response.data, 'error')
+                this.$emit('errorHandler', err)
             } )
         },
         closeEditModal: function() {
@@ -133,6 +136,7 @@ export default {
             } )
             .catch( err => {
                 console.log(err.response.data, 'error')
+                this.$emit('errorHandler', err)
             } )
         }
     }
