@@ -12419,9 +12419,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
-//
-//
-//
 var _default = {
   components: {
     backlog: _backlog.default,
@@ -12444,8 +12441,7 @@ var _default = {
       register_password: '',
       addTask_title: '',
       addTask_desc: '',
-      addTask_category: '' // showModal: false
-
+      addTask_category: ''
     };
   },
   methods: {
@@ -12495,8 +12491,6 @@ var _default = {
       });
     },
     editTask: function editTask(obj) {
-      console.log('masuk');
-
       for (var i = 0; i < this.task.length; i++) {
         if (this.task[i].id == obj.id) {
           this.task[i].title = obj.data.title;
@@ -13244,7 +13238,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "37619" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "39101" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

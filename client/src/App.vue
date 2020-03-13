@@ -30,7 +30,6 @@
             <div class="action-button">
                 <span v-on:click="showRegister">Click Here to Register</span>
                 <span>Click Here to Sign In with Google</span>
-                <!-- <button id="login-submit" class="login-btn">Sign In</button> -->
             </div>
         </div>
 
@@ -54,8 +53,6 @@
             <div class="action-button">
                 <span v-on:click="showLogin">Click Here to Login</span>
                 <span>Click Here to Sign In with Google</span>
-                <!-- <button id="login-render" class="login-btn">Login</button> -->
-                <!-- <button id="login-submit" class="login-btn">Sign In</button> -->
             </div>
         </div>
 
@@ -159,7 +156,6 @@ export default {
             addTask_title: '',
             addTask_desc: '',
             addTask_category: ''
-            // showModal: false
         }
     },
     methods: {
@@ -208,7 +204,6 @@ export default {
             } )
         },
         editTask: function(obj){
-            console.log('masuk')
             for(let i=0; i<this.task.length; i++){
                 if(this.task[i].id == obj.id){
                     this.task[i].title = obj.data.title
