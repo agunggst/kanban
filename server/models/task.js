@@ -12,7 +12,14 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     category: DataTypes.STRING,
-    description: DataTypes.STRING,
+    description: {
+      type: DataTypes.STRING,
+      validate:{
+        notEmpty: {
+          msg: 'Please Select Task Category'
+        }
+      }
+    },
     user_id: DataTypes.INTEGER
   }, {sequelize})
 

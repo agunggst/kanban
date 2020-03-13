@@ -10605,10 +10605,47 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = {
   props: ['backlog_content'],
   data: function data() {
-    return {};
+    return {
+      editModal: false,
+      editTask_title: '',
+      editTask_desc: '',
+      editTask_category: '',
+      editId: null
+    };
   },
   methods: {
     deleteTask: function deleteTask(id) {
@@ -10635,9 +10672,54 @@ var _default = {
 
             _this.$emit('deleteTask', id);
           }).catch(function (err) {
-            console.log(err, 'error ');
+            console.log(err.response.data, 'error ');
           });
         }
+      });
+    },
+    editTaskForm: function editTaskForm(id) {
+      var _this2 = this;
+
+      (0, _axios.default)({
+        method: 'get',
+        url: "http://localhost:3000/tasks/".concat(id),
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      }).then(function (result) {
+        _this2.editTask_title = result.data.title, _this2.editTask_desc = result.data.description, _this2.editTask_category = result.data.category, _this2.editId = id;
+        _this2.editModal = true;
+      }).catch(function (err) {
+        console.log(err.response.data, 'error');
+      });
+    },
+    closeEditModal: function closeEditModal() {
+      this.editModal = false;
+    },
+    editTask: function editTask() {
+      var _this3 = this;
+
+      var newData = {
+        title: this.editTask_title,
+        description: this.editTask_desc,
+        category: this.editTask_category
+      };
+      (0, _axios.default)({
+        method: 'put',
+        url: "http://localhost:3000/tasks/".concat(this.editId),
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        },
+        data: newData
+      }).then(function (result) {
+        _this3.editModal = false;
+
+        _this3.$emit('editTask', {
+          id: _this3.editId,
+          data: newData
+        });
+      }).catch(function (err) {
+        console.log(err.response.data, 'error');
       });
     }
   }
@@ -10657,32 +10739,201 @@ exports.default = _default;
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    _vm._l(_vm.backlog_content, function(content) {
-      return _c("div", { key: content.id, staticClass: "backlog-list list" }, [
-        _c("div", { staticClass: "list-content" }, [
-          _c("p", { staticClass: "backlog-list-title title" }, [
-            _vm._v(_vm._s(content.title))
-          ]),
-          _vm._v(" "),
-          _c("p", [_vm._v(_vm._s(content.description))])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "delete-btn" }, [
-          _c("i", {
-            staticClass: "fa fa-trash",
-            on: {
-              click: function($event) {
-                return _vm.deleteTask(content.id)
-              }
-            }
-          })
-        ])
-      ])
-    }),
-    0
+    [
+      _vm._l(_vm.backlog_content, function(content) {
+        return _c(
+          "div",
+          { key: content.id, staticClass: "backlog-list list" },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "list-content",
+                on: {
+                  click: function($event) {
+                    return _vm.editTaskForm(content.id)
+                  }
+                }
+              },
+              [
+                _c("p", { staticClass: "backlog-list-title title" }, [
+                  _vm._v(_vm._s(content.title))
+                ]),
+                _vm._v(" "),
+                _c("p", [_vm._v(_vm._s(content.description))])
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "delete-btn" }, [
+              _c("i", {
+                staticClass: "fa fa-trash",
+                on: {
+                  click: function($event) {
+                    return _vm.deleteTask(content.id)
+                  }
+                }
+              })
+            ])
+          ]
+        )
+      }),
+      _vm._v(" "),
+      _vm.editModal
+        ? _c("div", { staticClass: "editModal modal" }, [
+            _c("div", { staticClass: "modal-content" }, [
+              _c(
+                "div",
+                { staticClass: "x", on: { click: _vm.closeEditModal } },
+                [_vm._v("+")]
+              ),
+              _vm._v(" "),
+              _vm._m(0),
+              _vm._v(" "),
+              _c(
+                "form",
+                {
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      return _vm.editTask($event)
+                    }
+                  }
+                },
+                [
+                  _c("div", { staticClass: "textbox" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.editTask_title,
+                          expression: "editTask_title"
+                        }
+                      ],
+                      attrs: {
+                        type: "text",
+                        id: "editTask-title",
+                        placeholder: "Title"
+                      },
+                      domProps: { value: _vm.editTask_title },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.editTask_title = $event.target.value
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "textbox" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.editTask_desc,
+                          expression: "editTask_desc"
+                        }
+                      ],
+                      attrs: {
+                        type: "text",
+                        id: "editTask-desc",
+                        placeholder: "Description"
+                      },
+                      domProps: { value: _vm.editTask_desc },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.editTask_desc = $event.target.value
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "selectbox" }, [
+                    _c("label", { attrs: { for: "editTask-category" } }, [
+                      _vm._v("Category: ")
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.editTask_category,
+                            expression: "editTask_category"
+                          }
+                        ],
+                        attrs: { id: "editTask-category" },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.editTask_category = $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          }
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { value: "Backlog" } }, [
+                          _vm._v("Backlog")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "Todo" } }, [
+                          _vm._v("Todo")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "Done" } }, [
+                          _vm._v("Done")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "Completed" } }, [
+                          _vm._v("Completed")
+                        ])
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "submit-btn",
+                      attrs: { id: "editTask-submit" }
+                    },
+                    [_vm._v("Edit")]
+                  )
+                ]
+              )
+            ])
+          ])
+        : _vm._e()
+    ],
+    2
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "box-title" }, [
+      _c("h4", { staticClass: "editModal-title" }, [_vm._v("Edit Task")])
+    ])
+  }
+]
 render._withStripped = true
 
           return {
@@ -10736,10 +10987,47 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = {
   props: ['todo_content'],
   data: function data() {
-    return {};
+    return {
+      editModal: false,
+      editTask_title: '',
+      editTask_desc: '',
+      editTask_category: '',
+      editId: null
+    };
   },
   methods: {
     deleteTask: function deleteTask(id) {
@@ -10770,6 +11058,51 @@ var _default = {
           });
         }
       });
+    },
+    editTaskForm: function editTaskForm(id) {
+      var _this2 = this;
+
+      (0, _axios.default)({
+        method: 'get',
+        url: "http://localhost:3000/tasks/".concat(id),
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      }).then(function (result) {
+        _this2.editTask_title = result.data.title, _this2.editTask_desc = result.data.description, _this2.editTask_category = result.data.category, _this2.editId = id;
+        _this2.editModal = true;
+      }).catch(function (err) {
+        console.log(err.response.data, 'error');
+      });
+    },
+    closeEditModal: function closeEditModal() {
+      this.editModal = false;
+    },
+    editTask: function editTask() {
+      var _this3 = this;
+
+      var newData = {
+        title: this.editTask_title,
+        description: this.editTask_desc,
+        category: this.editTask_category
+      };
+      (0, _axios.default)({
+        method: 'put',
+        url: "http://localhost:3000/tasks/".concat(this.editId),
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        },
+        data: newData
+      }).then(function (result) {
+        _this3.editModal = false;
+
+        _this3.$emit('editTask', {
+          id: _this3.editId,
+          data: newData
+        });
+      }).catch(function (err) {
+        console.log(err.response.data, 'error');
+      });
     }
   }
 };
@@ -10788,32 +11121,197 @@ exports.default = _default;
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    _vm._l(_vm.todo_content, function(content) {
-      return _c("div", { key: content.id, staticClass: "todo-list list" }, [
-        _c("div", { staticClass: "list-content" }, [
-          _c("p", { staticClass: "todo-list-title title" }, [
-            _vm._v(_vm._s(content.title))
-          ]),
-          _vm._v(" "),
-          _c("p", [_vm._v(_vm._s(content.description))])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "delete-btn" }, [
-          _c("i", {
-            staticClass: "fa fa-trash",
-            on: {
-              click: function($event) {
-                return _vm.deleteTask(content.id)
+    [
+      _vm._l(_vm.todo_content, function(content) {
+        return _c("div", { key: content.id, staticClass: "todo-list list" }, [
+          _c(
+            "div",
+            {
+              staticClass: "list-content",
+              on: {
+                click: function($event) {
+                  return _vm.editTaskForm(content.id)
+                }
               }
-            }
-          })
+            },
+            [
+              _c("p", { staticClass: "todo-list-title title" }, [
+                _vm._v(_vm._s(content.title))
+              ]),
+              _vm._v(" "),
+              _c("p", [_vm._v(_vm._s(content.description))])
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "delete-btn" }, [
+            _c("i", {
+              staticClass: "fa fa-trash",
+              on: {
+                click: function($event) {
+                  return _vm.deleteTask(content.id)
+                }
+              }
+            })
+          ])
         ])
-      ])
-    }),
-    0
+      }),
+      _vm._v(" "),
+      _vm.editModal
+        ? _c("div", { staticClass: "editModal modal" }, [
+            _c("div", { staticClass: "modal-content" }, [
+              _c(
+                "div",
+                { staticClass: "x", on: { click: _vm.closeEditModal } },
+                [_vm._v("+")]
+              ),
+              _vm._v(" "),
+              _vm._m(0),
+              _vm._v(" "),
+              _c(
+                "form",
+                {
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      return _vm.editTask($event)
+                    }
+                  }
+                },
+                [
+                  _c("div", { staticClass: "textbox" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.editTask_title,
+                          expression: "editTask_title"
+                        }
+                      ],
+                      attrs: {
+                        type: "text",
+                        id: "editTask-title",
+                        placeholder: "Title"
+                      },
+                      domProps: { value: _vm.editTask_title },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.editTask_title = $event.target.value
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "textbox" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.editTask_desc,
+                          expression: "editTask_desc"
+                        }
+                      ],
+                      attrs: {
+                        type: "text",
+                        id: "editTask-desc",
+                        placeholder: "Description"
+                      },
+                      domProps: { value: _vm.editTask_desc },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.editTask_desc = $event.target.value
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "selectbox" }, [
+                    _c("label", { attrs: { for: "editTask-category" } }, [
+                      _vm._v("Category: ")
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.editTask_category,
+                            expression: "editTask_category"
+                          }
+                        ],
+                        attrs: { id: "editTask-category" },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.editTask_category = $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          }
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { value: "Backlog" } }, [
+                          _vm._v("Backlog")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "Todo" } }, [
+                          _vm._v("Todo")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "Done" } }, [
+                          _vm._v("Done")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "Completed" } }, [
+                          _vm._v("Completed")
+                        ])
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "submit-btn",
+                      attrs: { id: "editTask-submit" }
+                    },
+                    [_vm._v("Edit")]
+                  )
+                ]
+              )
+            ])
+          ])
+        : _vm._e()
+    ],
+    2
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "box-title" }, [
+      _c("h4", { staticClass: "editModal-title" }, [_vm._v("Edit Task")])
+    ])
+  }
+]
 render._withStripped = true
 
           return {
@@ -10867,10 +11365,47 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = {
   props: ['done_content'],
   data: function data() {
-    return {};
+    return {
+      editModal: false,
+      editTask_title: '',
+      editTask_desc: '',
+      editTask_category: '',
+      editId: null
+    };
   },
   methods: {
     deleteTask: function deleteTask(id) {
@@ -10901,6 +11436,51 @@ var _default = {
           });
         }
       });
+    },
+    editTaskForm: function editTaskForm(id) {
+      var _this2 = this;
+
+      (0, _axios.default)({
+        method: 'get',
+        url: "http://localhost:3000/tasks/".concat(id),
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      }).then(function (result) {
+        _this2.editTask_title = result.data.title, _this2.editTask_desc = result.data.description, _this2.editTask_category = result.data.category, _this2.editId = id;
+        _this2.editModal = true;
+      }).catch(function (err) {
+        console.log(err.response.data, 'error');
+      });
+    },
+    closeEditModal: function closeEditModal() {
+      this.editModal = false;
+    },
+    editTask: function editTask() {
+      var _this3 = this;
+
+      var newData = {
+        title: this.editTask_title,
+        description: this.editTask_desc,
+        category: this.editTask_category
+      };
+      (0, _axios.default)({
+        method: 'put',
+        url: "http://localhost:3000/tasks/".concat(this.editId),
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        },
+        data: newData
+      }).then(function (result) {
+        _this3.editModal = false;
+
+        _this3.$emit('editTask', {
+          id: _this3.editId,
+          data: newData
+        });
+      }).catch(function (err) {
+        console.log(err.response.data, 'error');
+      });
     }
   }
 };
@@ -10919,32 +11499,197 @@ exports.default = _default;
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    _vm._l(_vm.done_content, function(content) {
-      return _c("div", { key: content.id, staticClass: "done-list list" }, [
-        _c("div", { staticClass: "list-content" }, [
-          _c("p", { staticClass: "done-list-title title" }, [
-            _vm._v(_vm._s(content.title))
-          ]),
-          _vm._v(" "),
-          _c("p", [_vm._v(_vm._s(content.description))])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "delete-btn" }, [
-          _c("i", {
-            staticClass: "fa fa-trash",
-            on: {
-              click: function($event) {
-                return _vm.deleteTask(content.id)
+    [
+      _vm._l(_vm.done_content, function(content) {
+        return _c("div", { key: content.id, staticClass: "done-list list" }, [
+          _c(
+            "div",
+            {
+              staticClass: "list-content",
+              on: {
+                click: function($event) {
+                  return _vm.editTaskForm(content.id)
+                }
               }
-            }
-          })
+            },
+            [
+              _c("p", { staticClass: "done-list-title title" }, [
+                _vm._v(_vm._s(content.title))
+              ]),
+              _vm._v(" "),
+              _c("p", [_vm._v(_vm._s(content.description))])
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "delete-btn" }, [
+            _c("i", {
+              staticClass: "fa fa-trash",
+              on: {
+                click: function($event) {
+                  return _vm.deleteTask(content.id)
+                }
+              }
+            })
+          ])
         ])
-      ])
-    }),
-    0
+      }),
+      _vm._v(" "),
+      _vm.editModal
+        ? _c("div", { staticClass: "editModal modal" }, [
+            _c("div", { staticClass: "modal-content" }, [
+              _c(
+                "div",
+                { staticClass: "x", on: { click: _vm.closeEditModal } },
+                [_vm._v("+")]
+              ),
+              _vm._v(" "),
+              _vm._m(0),
+              _vm._v(" "),
+              _c(
+                "form",
+                {
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      return _vm.editTask($event)
+                    }
+                  }
+                },
+                [
+                  _c("div", { staticClass: "textbox" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.editTask_title,
+                          expression: "editTask_title"
+                        }
+                      ],
+                      attrs: {
+                        type: "text",
+                        id: "editTask-title",
+                        placeholder: "Title"
+                      },
+                      domProps: { value: _vm.editTask_title },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.editTask_title = $event.target.value
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "textbox" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.editTask_desc,
+                          expression: "editTask_desc"
+                        }
+                      ],
+                      attrs: {
+                        type: "text",
+                        id: "editTask-desc",
+                        placeholder: "Description"
+                      },
+                      domProps: { value: _vm.editTask_desc },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.editTask_desc = $event.target.value
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "selectbox" }, [
+                    _c("label", { attrs: { for: "editTask-category" } }, [
+                      _vm._v("Category: ")
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.editTask_category,
+                            expression: "editTask_category"
+                          }
+                        ],
+                        attrs: { id: "editTask-category" },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.editTask_category = $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          }
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { value: "Backlog" } }, [
+                          _vm._v("Backlog")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "Todo" } }, [
+                          _vm._v("Todo")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "Done" } }, [
+                          _vm._v("Done")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "Completed" } }, [
+                          _vm._v("Completed")
+                        ])
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "submit-btn",
+                      attrs: { id: "editTask-submit" }
+                    },
+                    [_vm._v("Edit")]
+                  )
+                ]
+              )
+            ])
+          ])
+        : _vm._e()
+    ],
+    2
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "box-title" }, [
+      _c("h4", { staticClass: "editModal-title" }, [_vm._v("Edit Task")])
+    ])
+  }
+]
 render._withStripped = true
 
           return {
@@ -10998,10 +11743,47 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = {
   props: ['completed_content'],
   data: function data() {
-    return {};
+    return {
+      editModal: false,
+      editTask_title: '',
+      editTask_desc: '',
+      editTask_category: '',
+      editId: null
+    };
   },
   methods: {
     deleteTask: function deleteTask(id) {
@@ -11032,6 +11814,51 @@ var _default = {
           });
         }
       });
+    },
+    editTaskForm: function editTaskForm(id) {
+      var _this2 = this;
+
+      (0, _axios.default)({
+        method: 'get',
+        url: "http://localhost:3000/tasks/".concat(id),
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      }).then(function (result) {
+        _this2.editTask_title = result.data.title, _this2.editTask_desc = result.data.description, _this2.editTask_category = result.data.category, _this2.editId = id;
+        _this2.editModal = true;
+      }).catch(function (err) {
+        console.log(err.response.data, 'error');
+      });
+    },
+    closeEditModal: function closeEditModal() {
+      this.editModal = false;
+    },
+    editTask: function editTask() {
+      var _this3 = this;
+
+      var newData = {
+        title: this.editTask_title,
+        description: this.editTask_desc,
+        category: this.editTask_category
+      };
+      (0, _axios.default)({
+        method: 'put',
+        url: "http://localhost:3000/tasks/".concat(this.editId),
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        },
+        data: newData
+      }).then(function (result) {
+        _this3.editModal = false;
+
+        _this3.$emit('editTask', {
+          id: _this3.editId,
+          data: newData
+        });
+      }).catch(function (err) {
+        console.log(err.response.data, 'error');
+      });
     }
   }
 };
@@ -11050,36 +11877,201 @@ exports.default = _default;
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    _vm._l(_vm.completed_content, function(content) {
-      return _c(
-        "div",
-        { key: content.id, staticClass: "completed-list list" },
-        [
-          _c("div", { staticClass: "list-content" }, [
-            _c("p", { staticClass: "completed-list-title title" }, [
-              _vm._v(_vm._s(content.title))
-            ]),
-            _vm._v(" "),
-            _c("p", [_vm._v(_vm._s(content.description))])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "delete-btn" }, [
-            _c("i", {
-              staticClass: "fa fa-trash",
-              on: {
-                click: function($event) {
-                  return _vm.deleteTask(content.id)
+    [
+      _vm._l(_vm.completed_content, function(content) {
+        return _c(
+          "div",
+          { key: content.id, staticClass: "completed-list list" },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "list-content",
+                on: {
+                  click: function($event) {
+                    return _vm.editTaskForm(content.id)
+                  }
                 }
-              }
-            })
+              },
+              [
+                _c("p", { staticClass: "completed-list-title title" }, [
+                  _vm._v(_vm._s(content.title))
+                ]),
+                _vm._v(" "),
+                _c("p", [_vm._v(_vm._s(content.description))])
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "delete-btn" }, [
+              _c("i", {
+                staticClass: "fa fa-trash",
+                on: {
+                  click: function($event) {
+                    return _vm.deleteTask(content.id)
+                  }
+                }
+              })
+            ])
+          ]
+        )
+      }),
+      _vm._v(" "),
+      _vm.editModal
+        ? _c("div", { staticClass: "editModal modal" }, [
+            _c("div", { staticClass: "modal-content" }, [
+              _c(
+                "div",
+                { staticClass: "x", on: { click: _vm.closeEditModal } },
+                [_vm._v("+")]
+              ),
+              _vm._v(" "),
+              _vm._m(0),
+              _vm._v(" "),
+              _c(
+                "form",
+                {
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      return _vm.editTask($event)
+                    }
+                  }
+                },
+                [
+                  _c("div", { staticClass: "textbox" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.editTask_title,
+                          expression: "editTask_title"
+                        }
+                      ],
+                      attrs: {
+                        type: "text",
+                        id: "editTask-title",
+                        placeholder: "Title"
+                      },
+                      domProps: { value: _vm.editTask_title },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.editTask_title = $event.target.value
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "textbox" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.editTask_desc,
+                          expression: "editTask_desc"
+                        }
+                      ],
+                      attrs: {
+                        type: "text",
+                        id: "editTask-desc",
+                        placeholder: "Description"
+                      },
+                      domProps: { value: _vm.editTask_desc },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.editTask_desc = $event.target.value
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "selectbox" }, [
+                    _c("label", { attrs: { for: "editTask-category" } }, [
+                      _vm._v("Category: ")
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.editTask_category,
+                            expression: "editTask_category"
+                          }
+                        ],
+                        attrs: { id: "editTask-category" },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.editTask_category = $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          }
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { value: "Backlog" } }, [
+                          _vm._v("Backlog")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "Todo" } }, [
+                          _vm._v("Todo")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "Done" } }, [
+                          _vm._v("Done")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "Completed" } }, [
+                          _vm._v("Completed")
+                        ])
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "submit-btn",
+                      attrs: { id: "editTask-submit" }
+                    },
+                    [_vm._v("Edit")]
+                  )
+                ]
+              )
+            ])
           ])
-        ]
-      )
-    }),
-    0
+        : _vm._e()
+    ],
+    2
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "box-title" }, [
+      _c("h4", { staticClass: "editModal-title" }, [_vm._v("Edit Task")])
+    ])
+  }
+]
 render._withStripped = true
 
           return {
@@ -11175,7 +12167,7 @@ function reloadCSS() {
 }
 
 module.exports = reloadCSS;
-},{"./bundle-url":"../../../../../../../lib/node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"src/components/addTask.vue":[function(require,module,exports) {
+},{"./bundle-url":"../../../../../../../lib/node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"src/components/addTaskForm.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -11199,14 +12191,14 @@ var _default = {
   }
 };
 exports.default = _default;
-        var $34af71 = exports.default || module.exports;
+        var $3e4f17 = exports.default || module.exports;
       
-      if (typeof $34af71 === 'function') {
-        $34af71 = $34af71.options;
+      if (typeof $3e4f17 === 'function') {
+        $3e4f17 = $3e4f17.options;
       }
     
         /* template */
-        Object.assign($34af71, (function () {
+        Object.assign($3e4f17, (function () {
           var render = function() {
   var _vm = this
   var _h = _vm.$createElement
@@ -11241,9 +12233,9 @@ render._withStripped = true
         if (api.compatible) {
           module.hot.accept();
           if (!module.hot.data) {
-            api.createRecord('$34af71', $34af71);
+            api.createRecord('$3e4f17', $3e4f17);
           } else {
-            api.reload('$34af71', $34af71);
+            api.reload('$3e4f17', $3e4f17);
           }
         }
 
@@ -11268,11 +12260,10 @@ var _done = _interopRequireDefault(require("./components/done"));
 
 var _completed = _interopRequireDefault(require("./components/completed"));
 
-var _addTask = _interopRequireDefault(require("./components/addTask"));
+var _addTaskForm = _interopRequireDefault(require("./components/addTaskForm"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//
 //
 //
 //
@@ -11409,7 +12400,7 @@ var _default = {
     todo: _todo.default,
     done: _done.default,
     completed: _completed.default,
-    add: _addTask.default
+    addForm: _addTaskForm.default
   },
   data: function data() {
     return {
@@ -11422,7 +12413,10 @@ var _default = {
       login_password: '',
       register_name: '',
       register_email: '',
-      register_password: '' // showModal: false
+      register_password: '',
+      addTask_title: '',
+      addTask_desc: '',
+      addTask_category: '' // showModal: false
 
     };
   },
@@ -11437,7 +12431,7 @@ var _default = {
       Swal.fire({
         icon: 'error',
         title: 'Error',
-        text: "".concat(error.response.data.message)
+        text: "".concat(Array.isArray(error.response.data.message) ? error.response.data.message.join(' And ') : error.response.data.message)
       });
     },
     showAddTaskModal: function showAddTaskModal() {
@@ -11446,8 +12440,45 @@ var _default = {
     closeAddModal: function closeAddModal() {
       this.addModal = false;
     },
-    fillContent: function fillContent() {
+    addTask: function addTask() {
       var _this = this;
+
+      var newData = {
+        title: this.addTask_title,
+        description: this.addTask_desc,
+        category: this.addTask_category
+      };
+      (0, _axios.default)({
+        method: 'post',
+        url: 'http://localhost:3000/tasks',
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        },
+        data: newData
+      }).then(function (result) {
+        _this.addTask_title = '';
+        _this.addTask_desc = '';
+        _this.addTask_category = '';
+        _this.addModal = false;
+
+        _this.task.push(newData);
+      }).catch(function (err) {
+        _this.errorHandler(err);
+      });
+    },
+    editTask: function editTask(obj) {
+      console.log('masuk');
+
+      for (var i = 0; i < this.task.length; i++) {
+        if (this.task[i].id == obj.id) {
+          this.task[i].title = obj.data.title;
+          this.task[i].category = obj.data.category;
+          this.task[i].description = obj.data.description;
+        }
+      }
+    },
+    fillContent: function fillContent() {
+      var _this2 = this;
 
       (0, _axios.default)({
         method: 'get',
@@ -11456,13 +12487,13 @@ var _default = {
           access_token: localStorage.getItem('access_token')
         }
       }).then(function (result) {
-        _this.task = result.data;
+        _this2.task = result.data;
       }).catch(function (err) {
-        _this.errorHandler(err);
+        _this2.errorHandler(err);
       });
     },
     login: function login() {
-      var _this2 = this;
+      var _this3 = this;
 
       (0, _axios.default)({
         method: 'post',
@@ -11472,21 +12503,21 @@ var _default = {
           password: this.login_password
         }
       }).then(function (result) {
-        _this2.isLogin = true;
-        _this2.login_email = null;
-        _this2.login_password = null;
+        _this3.isLogin = true;
+        _this3.login_email = null;
+        _this3.login_password = null;
         localStorage.setItem('access_token', result.data.access_token);
 
-        _this2.fillContent();
+        _this3.fillContent();
       }).catch(function (err) {
-        _this2.errorHandler(err);
+        _this3.errorHandler(err);
       });
     },
     logout: function logout() {
       localStorage.removeItem('access_token'), this.isLogin = false;
     },
     register: function register() {
-      var _this3 = this;
+      var _this4 = this;
 
       (0, _axios.default)({
         method: 'post',
@@ -11497,15 +12528,15 @@ var _default = {
           password: this.register_password
         }
       }).then(function (result) {
-        _this3.isLogin = true;
-        _this3.register_name = null;
-        _this3.register_email = null;
-        _this3.register_password = null;
+        _this4.isLogin = true;
+        _this4.register_name = null;
+        _this4.register_email = null;
+        _this4.register_password = null;
         localStorage.setItem('access_token', result.data.access_token);
 
-        _this3.fillContent();
+        _this4.fillContent();
       }).catch(function (err) {
-        _this3.errorHandler(err);
+        _this4.errorHandler(err);
       });
     },
     deleteTask: function deleteTask(id) {
@@ -11843,6 +12874,9 @@ exports.default = _default;
                     on: {
                       deleteTask: function($event) {
                         return _vm.deleteTask($event)
+                      },
+                      editTask: function($event) {
+                        return _vm.editTask($event)
                       }
                     }
                   })
@@ -11863,6 +12897,9 @@ exports.default = _default;
                     on: {
                       deleteTask: function($event) {
                         return _vm.deleteTask($event)
+                      },
+                      editTask: function($event) {
+                        return _vm.editTask($event)
                       }
                     }
                   })
@@ -11883,6 +12920,9 @@ exports.default = _default;
                     on: {
                       deleteTask: function($event) {
                         return _vm.deleteTask($event)
+                      },
+                      editTask: function($event) {
+                        return _vm.editTask($event)
                       }
                     }
                   })
@@ -11903,6 +12943,9 @@ exports.default = _default;
                     on: {
                       deleteTask: function($event) {
                         return _vm.deleteTask($event)
+                      },
+                      editTask: function($event) {
+                        return _vm.editTask($event)
                       }
                     }
                   })
@@ -11930,7 +12973,7 @@ exports.default = _default;
                   on: {
                     submit: function($event) {
                       $event.preventDefault()
-                      return _vm.aaaaaaaaaaaaaaaaaaa($event)
+                      return _vm.addTask($event)
                     }
                   }
                 },
@@ -12056,7 +13099,7 @@ exports.default = _default;
           ])
         : _vm._e(),
       _vm._v(" "),
-      _c("add", {
+      _c("addForm", {
         attrs: { isLogin: _vm.isLogin },
         on: { showAddTaskModal: _vm.showAddTaskModal }
       })
@@ -12118,7 +13161,7 @@ render._withStripped = true
         
       }
     })();
-},{"axios":"node_modules/axios/index.js","./components/backlog":"src/components/backlog.vue","./components/todo":"src/components/todo.vue","./components/done":"src/components/done.vue","./components/completed":"src/components/completed.vue","./components/addTask":"src/components/addTask.vue","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/main.js":[function(require,module,exports) {
+},{"axios":"node_modules/axios/index.js","./components/backlog":"src/components/backlog.vue","./components/todo":"src/components/todo.vue","./components/done":"src/components/done.vue","./components/completed":"src/components/completed.vue","./components/addTaskForm":"src/components/addTaskForm.vue","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/main.js":[function(require,module,exports) {
 "use strict";
 
 var _vue = _interopRequireDefault(require("vue"));
@@ -12161,7 +13204,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41247" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "45679" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

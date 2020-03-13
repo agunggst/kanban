@@ -68,28 +68,28 @@
                 <h5>Backlog</h5>
                 <div class="backlog-content content">
                     <!-- Isi BackLog -->
-                    <backlog v-bind:backlog_content="backlog_content" v-on:deleteTask="deleteTask($event)"></backlog>
+                    <backlog v-bind:backlog_content="backlog_content" v-on:deleteTask="deleteTask($event)" v-on:editTask="editTask($event)"></backlog>
                 </div>
             </div>
             <div class="kanban-box todo">
                 <h5>Todo</h5>
                 <div class="todo-content content">
                     <!-- Isi Todo -->
-                    <todo v-bind:todo_content="todo_content" v-on:deleteTask="deleteTask($event)"></todo>
+                    <todo v-bind:todo_content="todo_content" v-on:deleteTask="deleteTask($event)" v-on:editTask="editTask($event)"></todo>
                 </div>
             </div>
             <div class="kanban-box done">
                 <h5>Done</h5>
                 <div class="done-content content">
                     <!-- Isi done -->
-                    <done v-bind:done_content="done_content" v-on:deleteTask="deleteTask($event)"></done>
+                    <done v-bind:done_content="done_content" v-on:deleteTask="deleteTask($event)" v-on:editTask="editTask($event)"></done>
                 </div>
             </div>
             <div class="kanban-box completed">
                 <h5>Completed</h5>
                 <div class="completed-content content">
                     <!-- Isi completed -->
-                    <completed v-bind:completed_content="completed_content" v-on:deleteTask="deleteTask($event)"></completed>
+                    <completed v-bind:completed_content="completed_content" v-on:deleteTask="deleteTask($event)" v-on:editTask="editTask($event)"></completed>
                 </div>
             </div>
 
@@ -104,7 +104,7 @@
                     <h4 class="addTask-title">Add Task</h4>
                 </div>
 
-                <form v-on:submit.prevent="aaaaaaaaaaaaaaaaaaa">
+                <form v-on:submit.prevent="addTask">
                     <div class="textbox">
                         <input type="text" id="addTask-title" placeholder="Title" v-model="addTask_title">
                     </div>
@@ -156,6 +156,9 @@ export default {
             register_name: '',
             register_email: '',
             register_password: '',
+            addTask_title: '',
+            addTask_desc: '',
+            addTask_category: ''
             // showModal: false
         }
     },
@@ -170,7 +173,7 @@ export default {
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
-                text: `${error.response.data.message}`
+                text: `${(Array.isArray(error.response.data.message))?error.response.data.message.join(' And '):error.response.data.message}`
             })
         },
         showAddTaskModal: function() {
@@ -178,6 +181,41 @@ export default {
         },
         closeAddModal: function() {
             this.addModal = false
+        },
+        addTask: function() {
+            let newData = {
+                title: this.addTask_title,
+                description: this.addTask_desc,
+                category: this.addTask_category
+            }
+            axios({
+                method: 'post',
+                url: 'http://localhost:3000/tasks',
+                headers: {
+                    access_token: localStorage.getItem('access_token')
+                },
+                data: newData
+            })
+            .then( result => {
+                this.addTask_title = ''
+                this.addTask_desc = ''
+                this.addTask_category = ''
+                this.addModal = false
+                this.task.push(newData)
+            } )
+            .catch( err => {
+                this.errorHandler(err)
+            } )
+        },
+        editTask: function(obj){
+            console.log('masuk')
+            for(let i=0; i<this.task.length; i++){
+                if(this.task[i].id == obj.id){
+                    this.task[i].title = obj.data.title
+                    this.task[i].category = obj.data.category
+                    this.task[i].description = obj.data.description
+                }
+            }
         },
         fillContent: function() {
             axios({

@@ -63,24 +63,28 @@
     border: 3px solid $color-backlog;
     border-radius: 10px;
     margin: 5px 5px 5px 5px;
+    cursor: pointer;
 }
 
 .todo-list{
     border: 3px solid $color-todo;
     border-radius: 10px;
     margin: 5px 5px 5px 5px;
+    cursor: pointer;
 }
 
 .done-list{
     border: 3px solid $color-done;
     border-radius: 10px;
     margin: 5px 5px 5px 5px;
+    cursor: pointer;
 }
 
 .completed-list{
     border: 3px solid $color-completed;
     border-radius: 10px;
     margin: 5px 5px 5px 5px;
+    cursor: pointer;
 }
 
 .content p{
@@ -92,9 +96,9 @@
     font-weight: bold;
 }
 
-.list{
-    cursor: pointer;
-}
+// .list{
+//     cursor: pointer;
+// }
 
 .add-btn{
     position: fixed;
