@@ -1,4 +1,3 @@
-
 # kanban
 _______________________
 
@@ -7,6 +6,7 @@ _______________________
 _______________________
 
 ## Postman Documentation
+Click this link if you want to see the detail example request and response:
 [click here](https://documenter.getpostman.com/view/10570997/SzS2vncz)
 _______________________
 
