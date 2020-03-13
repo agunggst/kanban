@@ -18,8 +18,8 @@ Route | HTTP | Header(s) | Body | Description
 --- | --- | --- | --- | ---
 /tasks | GET | token | none | Read All User's Task
 /tasks/:id | GET | token | none | Read one User's Task by Id
-/tasks | POST | token | title: string, description: string, due_date: date | Create User's Task
-/tasks/:id | PUT | token | title: string, description: string, due_date: date, status: boolean | Edit User's Task by Id
+/tasks | POST | token | title: string, description: string, category: string | Create User's Task
+/tasks/:id | PUT | token | title: string, description: string, category: string | Edit User's Task by Id
 /tasks/:id | DELETE | token | none | Delete User's Task by Id
 
 ### User Routing:
