@@ -191,64 +191,10 @@ export default {
             this.isLogin = true
             this.fillContent()
         },
-        // login: function() {
-        //     axios({
-        //         method: 'post',
-        //         url: 'http://localhost:3000/users/login',
-        //         data: {
-        //             email: this.login_email,
-        //             password: this.login_password
-        //         }
-        //     })
-        //     .then( result => {
-        //         this.isLogin = true
-        //         this.login_email = ''
-        //         this.login_password = ''
-        //         localStorage.setItem('access_token', result.data.access_token)
-        //         this.fillContent()
-        //     } )
-        //     .catch( err => {
-        //         this.errorHandler(err)
-        //     } )
-        // },
         logout: function() {
             localStorage.removeItem('access_token'),
             this.isLogin = false
         },
-        // register: function() {
-        //     if(this.register_password == this.register_password_confirm){
-        //         axios({
-        //             method: 'post',
-        //             url: 'http://localhost:3000/users/register',
-        //             data: {
-        //                 name: this.register_name,
-        //                 email: this.register_email,
-        //                 password: this.register_password
-        //             }
-        //         })
-        //         .then( result => {
-        //             this.isLogin = true
-        //             this.register_name = ''
-        //             this.register_email = ''
-        //             this.register_password = ''
-        //             this.register_password_confirm = ''
-        //             localStorage.setItem('access_token', result.data.access_token)
-        //             this.fillContent()
-        //         } )
-        //         .catch( err => {
-        //             this.errorHandler(err)
-        //         } )
-        //     }else{
-        //         let error = {
-        //             response: {
-        //                 data: {
-        //                     message: 'Password Does\'nt Match'
-        //                 }
-        //             }
-        //         }
-        //         this.errorHandler(error)
-        //     }
-        // },
         deleteTask: function(id){
             let temp = []
             this.task.forEach(element => {

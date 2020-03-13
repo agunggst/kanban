@@ -1,7 +1,9 @@
 const { User } = require('../models')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
+const {OAuth2Client} = require('google-auth-library')
 require('dotenv').config()
+const client = new OAuth2Client(process.env.CLIENT_ID)
 
 class UserController {
     static login(request, response, next) {
@@ -77,6 +79,52 @@ class UserController {
             response.status(201).json({access_token: token})
         } )
         .catch( err => {
+            next(err)
+        } )
+    }
+
+    static googleLogin(request, response, next){
+        let token = request.body.token
+        let data_google
+        client.verifyIdToken({
+            idToken: token,
+            audience: process.env.CLIENT_ID
+        })
+        .then( ticket => {
+            const payload = ticket.getPayload()
+            data_google = {
+                name: payload.name,
+                email: payload.email
+            }
+            return User.findOne({
+                where: {
+                    email: data_google.email
+                }
+            })
+        } )
+        .then( result => {
+            if(result != null){
+                let access_token = jwt.sign({
+                    id: result.id,
+                    name: result.name,
+                    email: result.email
+                }, process.env.JWT_SECRET)
+                response.status(200).json({access_token})
+            }else{
+                data_google.password = process.env.GPASS
+                return User.create(data_google)
+            }
+        } )
+        .then( result => {
+            let token = jwt.sign({
+                id: result.id,
+                name: result.name,
+                email: result.email
+            }, process.env.JWT_SECRET)
+            response.status(201).json({access_token: token})
+        } )
+        .catch( err => {
+            console.log('error google login', err)
             next(err)
         } )
     }

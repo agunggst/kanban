@@ -17,7 +17,7 @@
             </form>
             <div class="action-button">
                 <span v-on:click="showRegister">Click Here to Register</span>
-                <span>Click Here to Sign In with Google</span>
+                <span v-google-signin-button="clientId" class="google-signin-button">Click Here to Sign In with Google</span>
             </div>
         </div>
 
@@ -45,7 +45,7 @@
             </form>
             <div class="action-button">
                 <span v-on:click="showLogin">Click Here to Login</span>
-                <span>Click Here to Sign In with Google</span>
+                <span v-google-signin-button="clientId" class="google-signin-button">Click Here to Sign In with Google</span>
             </div>
         </div>
 
@@ -53,9 +53,13 @@
 </template>
 <script>
 import axios from 'axios'
+import GoogleSignInButton from 'vue-google-signin-button-directive'
 
 export default {
     props: ['isLogin', 'regis_login'],
+    directives: {
+        GoogleSignInButton
+    },
     data: function() {
         return {
             login_email: '',
@@ -64,6 +68,7 @@ export default {
             register_email: '',
             register_password: '',
             register_password_confirm: '',
+            clientId: `1036611868844-eeg4u6apapgg0uf5kigabq4f5k37tv91.apps.googleusercontent.com`
         }
     },
     methods: {
@@ -125,6 +130,25 @@ export default {
                 this.$emit('errorHandler', error)
             }
         },
+        OnGoogleAuthSuccess: function(idToken) {
+            axios({
+                method: 'post',
+                url: 'http://localhost:3000/users/googleLogin',
+                data: {
+                    token: idToken
+                }
+            })
+            .then( result => {
+                localStorage.setItem('access_token', result.data.access_token)
+                this.$emit('fillContent')
+            } )
+            .catch( err => {
+                this.$emit('errorHandler', err)
+            } )
+        },
+        OnGoogleAuthFail: function(error) {
+            this.$emit('errorHandler', error)
+        }
     }
 }
 </script>

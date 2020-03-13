@@ -12266,7 +12266,60 @@ render._withStripped = true
         
       }
     })();
-},{"_css_loader":"../../../../../../../lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/components/regis_login.vue":[function(require,module,exports) {
+},{"_css_loader":"../../../../../../../lib/node_modules/parcel-bundler/src/builtins/css-loader.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"node_modules/vue-google-signin-button-directive/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _vue = _interopRequireDefault(require("vue"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _default = _vue.default.directive('google-signin-button', {
+  bind: function (el, binding, vnode) {
+    CheckComponentMethods();
+    let clientId = binding.value;
+    let googleSignInAPI = document.createElement('script');
+    googleSignInAPI.setAttribute('src', 'https://apis.google.com/js/api:client.js');
+    document.head.appendChild(googleSignInAPI);
+    googleSignInAPI.onload = InitGoogleButton;
+
+    function InitGoogleButton() {
+      gapi.load('auth2', () => {
+        const auth2 = gapi.auth2.init({
+          client_id: clientId,
+          cookiepolicy: 'single_host_origin'
+        });
+        auth2.attachClickHandler(el, {}, OnSuccess, Onfail);
+      });
+    }
+
+    function OnSuccess(googleUser) {
+      vnode.context.OnGoogleAuthSuccess(googleUser.getAuthResponse().id_token);
+      googleUser.disconnect();
+    }
+
+    function Onfail(error) {
+      vnode.context.OnGoogleAuthFail(error);
+    }
+
+    function CheckComponentMethods() {
+      if (!vnode.context.OnGoogleAuthSuccess) {
+        throw new Error('The method OnGoogleAuthSuccess must be defined on the component');
+      }
+
+      if (!vnode.context.OnGoogleAuthFail) {
+        throw new Error('The method OnGoogleAuthFail must be defined on the component');
+      }
+    }
+  }
+});
+
+exports.default = _default;
+},{"vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/components/regis_login.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -12275,6 +12328,8 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 
 var _axios = _interopRequireDefault(require("axios"));
+
+var _vueGoogleSigninButtonDirective = _interopRequireDefault(require("vue-google-signin-button-directive"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -12333,6 +12388,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 var _default = {
   props: ['isLogin', 'regis_login'],
+  directives: {
+    GoogleSignInButton: _vueGoogleSigninButtonDirective.default
+  },
   data: function data() {
     return {
       login_email: '',
@@ -12340,7 +12398,8 @@ var _default = {
       register_name: '',
       register_email: '',
       register_password: '',
-      register_password_confirm: ''
+      register_password_confirm: '',
+      clientId: "1036611868844-eeg4u6apapgg0uf5kigabq4f5k37tv91.apps.googleusercontent.com"
     };
   },
   methods: {
@@ -12403,6 +12462,26 @@ var _default = {
         };
         this.$emit('errorHandler', error);
       }
+    },
+    OnGoogleAuthSuccess: function OnGoogleAuthSuccess(idToken) {
+      var _this3 = this;
+
+      (0, _axios.default)({
+        method: 'post',
+        url: 'http://localhost:3000/users/googleLogin',
+        data: {
+          token: idToken
+        }
+      }).then(function (result) {
+        localStorage.setItem('access_token', result.data.access_token);
+
+        _this3.$emit('fillContent');
+      }).catch(function (err) {
+        _this3.$emit('errorHandler', err);
+      });
+    },
+    OnGoogleAuthFail: function OnGoogleAuthFail(error) {
+      this.$emit('errorHandler', error);
     }
   }
 };
@@ -12502,7 +12581,21 @@ exports.default = _default;
               _vm._v("Click Here to Register")
             ]),
             _vm._v(" "),
-            _c("span", [_vm._v("Click Here to Sign In with Google")])
+            _c(
+              "span",
+              {
+                directives: [
+                  {
+                    name: "google-signin-button",
+                    rawName: "v-google-signin-button",
+                    value: _vm.clientId,
+                    expression: "clientId"
+                  }
+                ],
+                staticClass: "google-signin-button"
+              },
+              [_vm._v("Click Here to Sign In with Google")]
+            )
           ])
         ])
       : _vm._e(),
@@ -12643,7 +12736,21 @@ exports.default = _default;
               _vm._v("Click Here to Login")
             ]),
             _vm._v(" "),
-            _c("span", [_vm._v("Click Here to Sign In with Google")])
+            _c(
+              "span",
+              {
+                directives: [
+                  {
+                    name: "google-signin-button",
+                    rawName: "v-google-signin-button",
+                    value: _vm.clientId,
+                    expression: "clientId"
+                  }
+                ],
+                staticClass: "google-signin-button"
+              },
+              [_vm._v("Click Here to Sign In with Google")]
+            )
           ])
         ])
       : _vm._e()
@@ -12695,7 +12802,7 @@ render._withStripped = true
         
       }
     })();
-},{"axios":"node_modules/axios/index.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/App.vue":[function(require,module,exports) {
+},{"axios":"node_modules/axios/index.js","vue-google-signin-button-directive":"node_modules/vue-google-signin-button-directive/index.js","vue-hot-reload-api":"node_modules/vue-hot-reload-api/dist/index.js","vue":"node_modules/vue/dist/vue.runtime.esm.js"}],"src/App.vue":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -12904,63 +13011,9 @@ var _default = {
       this.isLogin = true;
       this.fillContent();
     },
-    // login: function() {
-    //     axios({
-    //         method: 'post',
-    //         url: 'http://localhost:3000/users/login',
-    //         data: {
-    //             email: this.login_email,
-    //             password: this.login_password
-    //         }
-    //     })
-    //     .then( result => {
-    //         this.isLogin = true
-    //         this.login_email = ''
-    //         this.login_password = ''
-    //         localStorage.setItem('access_token', result.data.access_token)
-    //         this.fillContent()
-    //     } )
-    //     .catch( err => {
-    //         this.errorHandler(err)
-    //     } )
-    // },
     logout: function logout() {
       localStorage.removeItem('access_token'), this.isLogin = false;
     },
-    // register: function() {
-    //     if(this.register_password == this.register_password_confirm){
-    //         axios({
-    //             method: 'post',
-    //             url: 'http://localhost:3000/users/register',
-    //             data: {
-    //                 name: this.register_name,
-    //                 email: this.register_email,
-    //                 password: this.register_password
-    //             }
-    //         })
-    //         .then( result => {
-    //             this.isLogin = true
-    //             this.register_name = ''
-    //             this.register_email = ''
-    //             this.register_password = ''
-    //             this.register_password_confirm = ''
-    //             localStorage.setItem('access_token', result.data.access_token)
-    //             this.fillContent()
-    //         } )
-    //         .catch( err => {
-    //             this.errorHandler(err)
-    //         } )
-    //     }else{
-    //         let error = {
-    //             response: {
-    //                 data: {
-    //                     message: 'Password Does\'nt Match'
-    //                 }
-    //             }
-    //         }
-    //         this.errorHandler(error)
-    //     }
-    // },
     deleteTask: function deleteTask(id) {
       var temp = [];
       this.task.forEach(function (element) {
@@ -13425,7 +13478,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "34203" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "38987" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
