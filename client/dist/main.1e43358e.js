@@ -12896,6 +12896,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 //
 var rootUrl = 'http://localhost:3000';
+var socket = io.connect(rootUrl);
 var _default = {
   components: {
     backlog: _backlog.default,
@@ -12959,6 +12960,8 @@ var _default = {
         _this.addModal = false;
 
         _this.task.push(result.data.data);
+
+        socket.emit('shoot', _this.task);
       }).catch(function (err) {
         _this.errorHandler(err);
       });
@@ -12971,6 +12974,8 @@ var _default = {
           this.task[i].description = obj.data.description;
         }
       }
+
+      socket.emit('shoot', this.task);
     },
     fillContent: function fillContent() {
       var _this2 = this;
@@ -13002,6 +13007,7 @@ var _default = {
         }
       });
       this.task = temp;
+      socket.emit('shoot', this.task);
     }
   },
   computed: {
@@ -13030,6 +13036,13 @@ var _default = {
     if (localStorage.getItem('access_token')) {
       this.fillContent();
     }
+  },
+  mounted: function mounted() {
+    var _this3 = this;
+
+    socket.on('shootBack', function (data) {
+      _this3.fillContent();
+    });
   }
 };
 exports.default = _default;
@@ -13424,6 +13437,8 @@ var _App = _interopRequireDefault(require("./App.vue"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var rootUrl = 'http://localhost:3000';
+var socket = io.connect(rootUrl);
 new _vue.default({
   el: '#app',
   render: function render(createElement) {
@@ -13458,7 +13473,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "36939" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "36019" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

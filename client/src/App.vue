@@ -97,6 +97,7 @@ import completed from './components/completed'
 import addForm from './components/addTaskForm'
 import regislogin from './components/regis_login'
 const rootUrl = 'http://localhost:3000'
+let socket = io.connect(rootUrl)
 
 export default {
     components: {
@@ -159,6 +160,7 @@ export default {
                 this.addTask_category = ''
                 this.addModal = false
                 this.task.push(result.data.data)
+                socket.emit('shoot', this.task)
             } )
             .catch( err => {
                 this.errorHandler(err)
@@ -172,6 +174,7 @@ export default {
                     this.task[i].description = obj.data.description
                 }
             }
+            socket.emit('shoot', this.task)
         },
         fillContent: function() {
             axios({
@@ -204,6 +207,7 @@ export default {
                 }
             })
             this.task = temp
+            socket.emit('shoot', this.task)
         }
     },
     computed: {
@@ -224,6 +228,11 @@ export default {
         if(localStorage.getItem('access_token')){
             this.fillContent()
         }
+    },
+    mounted: function() {
+        socket.on('shootBack', (data) => {
+            this.fillContent()
+        })
     }
 }
 </script>

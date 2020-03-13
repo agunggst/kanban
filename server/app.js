@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const cors = require('cors')
+const socket = require('socket.io')
 require('dotenv').config()
 
 const port = process.env.PORT || 3000
@@ -12,6 +13,16 @@ app.use(cors())
 app.use('/', require('./routers'))
 app.use(require('./errorHandler/errorHandler'))
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
     console.log('This Server is Running on Port: ', port)
+})
+
+const io = socket(server)
+
+io.on('connection', (socket) => {
+    console.log('made socket connection', socket.id)
+
+    socket.on('shoot', (data) => {
+        io.sockets.emit('shootBack', data)
+    })
 })
