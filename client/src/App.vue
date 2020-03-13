@@ -14,51 +14,7 @@
                 </nav>
         </header>
         
-        <div class="box login-box user-access" v-if="!isLogin && regis_login">
-            <div class="box-title">
-                <h4 class="login-title">Login</h4>
-            </div>
-            <form v-on:submit.prevent="login">
-                <div class="textbox">
-                    <input type="email" id="login-email" placeholder="Email Address" v-model="login_email">
-                </div>
-                <div class="textbox">
-                    <input type="password" id="login-password" placeholder="Password" v-model="login_password">
-                </div>
-                <button id="login-submit" class="submit-btn">Sign In</button>
-            </form>
-            <div class="action-button">
-                <span v-on:click="showRegister">Click Here to Register</span>
-                <span>Click Here to Sign In with Google</span>
-            </div>
-        </div>
-
-        <div class="box register-box user-access" v-if="!isLogin && !regis_login">
-            <div class="box-title">
-                <h4 class="register-title">Register</h4>
-            </div>
-            <form v-on:submit.prevent="register">
-                <div class="textbox">
-                    <input type="text" id="register-name" placeholder="Name" v-model="register_name">
-                </div>
-                <div class="textbox">
-                    <input type="email" id="register-email" placeholder="Email Address" v-model="register_email">
-                </div>
-                <div class="textbox">
-                    <input type="password" id="register-password" placeholder="Password"
-                        v-model="register_password">
-                </div>
-                <div class="textbox">
-                    <input type="password" id="register-password" placeholder="Confirm Password"
-                        v-model="register_password_confirm">
-                </div>
-                <button id="register-submit" class="submit-btn">Sign Up</button>
-            </form>
-            <div class="action-button">
-                <span v-on:click="showLogin">Click Here to Login</span>
-                <span>Click Here to Sign In with Google</span>
-            </div>
-        </div>
+        <regislogin v-bind:isLogin="isLogin" v-bind:regis_login="regis_login" v-on:fillContent="login" v-on:errorHandler="errorHandler($event)"></regislogin>
 
         <div class="user_info-container box" v-if="isLogin">
             <h4 class="user_name box-title" id="user_name"> Your Kanban! </h4>
@@ -139,6 +95,7 @@ import todo from './components/todo'
 import done from './components/done'
 import completed from './components/completed'
 import addForm from './components/addTaskForm'
+import regislogin from './components/regis_login'
 
 export default {
     components: {
@@ -146,7 +103,8 @@ export default {
         todo,
         done,
         completed,
-        addForm
+        addForm,
+        regislogin
     },
     data: function() {
         return {
@@ -155,12 +113,6 @@ export default {
             isLogin: (localStorage.getItem('access_token')?true:false),
             regis_login: true,
             addModal: false,
-            login_email: '',
-            login_password: '',
-            register_name: '',
-            register_email: '',
-            register_password: '',
-            register_password_confirm: '',
             addTask_title: '',
             addTask_desc: '',
             addTask_category: ''
@@ -235,64 +187,68 @@ export default {
                 this.errorHandler(err)
             } )
         },
-        login: function() {
-            axios({
-                method: 'post',
-                url: 'http://localhost:3000/users/login',
-                data: {
-                    email: this.login_email,
-                    password: this.login_password
-                }
-            })
-            .then( result => {
-                this.isLogin = true
-                this.login_email = null
-                this.login_password = null
-                localStorage.setItem('access_token', result.data.access_token)
-                this.fillContent()
-            } )
-            .catch( err => {
-                this.errorHandler(err)
-            } )
+        login: function(){
+            this.isLogin = true
+            this.fillContent()
         },
+        // login: function() {
+        //     axios({
+        //         method: 'post',
+        //         url: 'http://localhost:3000/users/login',
+        //         data: {
+        //             email: this.login_email,
+        //             password: this.login_password
+        //         }
+        //     })
+        //     .then( result => {
+        //         this.isLogin = true
+        //         this.login_email = ''
+        //         this.login_password = ''
+        //         localStorage.setItem('access_token', result.data.access_token)
+        //         this.fillContent()
+        //     } )
+        //     .catch( err => {
+        //         this.errorHandler(err)
+        //     } )
+        // },
         logout: function() {
             localStorage.removeItem('access_token'),
             this.isLogin = false
         },
-        register: function() {
-            if(this.register_password == this.register_password_confirm){
-                axios({
-                    method: 'post',
-                    url: 'http://localhost:3000/users/register',
-                    data: {
-                        name: this.register_name,
-                        email: this.register_email,
-                        password: this.register_password
-                    }
-                })
-                .then( result => {
-                    this.isLogin = true
-                    this.register_name = ''
-                    this.register_email = ''
-                    this.register_password = ''
-                    this.register_password_confirm = ''
-                    localStorage.setItem('access_token', result.data.access_token)
-                    this.fillContent()
-                } )
-                .catch( err => {
-                    this.errorHandler(err)
-                } )
-            }else{
-                let error = {
-                    response: {
-                        data: {
-                            message: 'Password Does\'nt Match'
-                        }
-                    }
-                }
-                this.errorHandler(error)
-            }
-        },
+        // register: function() {
+        //     if(this.register_password == this.register_password_confirm){
+        //         axios({
+        //             method: 'post',
+        //             url: 'http://localhost:3000/users/register',
+        //             data: {
+        //                 name: this.register_name,
+        //                 email: this.register_email,
+        //                 password: this.register_password
+        //             }
+        //         })
+        //         .then( result => {
+        //             this.isLogin = true
+        //             this.register_name = ''
+        //             this.register_email = ''
+        //             this.register_password = ''
+        //             this.register_password_confirm = ''
+        //             localStorage.setItem('access_token', result.data.access_token)
+        //             this.fillContent()
+        //         } )
+        //         .catch( err => {
+        //             this.errorHandler(err)
+        //         } )
+        //     }else{
+        //         let error = {
+        //             response: {
+        //                 data: {
+        //                     message: 'Password Does\'nt Match'
+        //                 }
+        //             }
+        //         }
+        //         this.errorHandler(error)
+        //     }
+        // },
         deleteTask: function(id){
             let temp = []
             this.task.forEach(element => {
