@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:500&display=swap');
+
+$color-background: #1d3a45;
+$color-primary: #24252A;
+$color-secondary: rgba(140, 143, 151, 1);
+$color-font-nav: #edf0f1;
+$color-button-blue: #007a99;
+$color-backlog: #463b3f;
+$color-todo: #475f82;
+$color-done: #dcc8ad;
+$color-completed: #97b3d4;
+
+body {
+    margin: 0;
+    background-color: $color-background;
+    font-family: "Montserrat", sans-serif;
+    text-align: center;
+}
+
+@import "navbar.scss";
+@import "kanban.scss";
+@import "modal.scss";
